@@ -1,6 +1,6 @@
-# Travel Plan
+# Travel Planner
 
-Travel Plan 是一个可离线使用的个人旅行行程 PWA Starter Kit。它可以部署成静态网站，并在 iPhone Safari 中“添加到主屏幕”。
+Travel Planner 是一个可离线使用的个人旅行行程 PWA Starter Kit。它可以部署成静态网站，并在 iPhone Safari 中“添加到主屏幕”。
 
 本仓库只包含程序壳和完全虚构的 sample trip，不包含任何真实行程、账号配置或密钥。
 
