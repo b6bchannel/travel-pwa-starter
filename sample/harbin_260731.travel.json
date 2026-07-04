@@ -1,0 +1,2839 @@
+{
+  "kind": "travel-plan-package",
+  "version": 1,
+  "tripId": "heilongjiang-north-loop-2026",
+  "fileName": "harbin_260731.travel.json",
+  "tripMeta": {
+    "id": "heilongjiang-north-loop-2026",
+    "title": "黑龙江北境火山自驾｜测试包",
+    "dateStart": "2026-07-31",
+    "dateEnd": "2026-08-10",
+    "status": "demo",
+    "lastUpdated": "2026-07-03",
+    "mapProvider": "amap"
+  },
+  "trip": {
+    "metadata": {
+      "schemaVersion": 1,
+      "tripYear": 2026,
+      "generatedAt": "2026-07-03",
+      "source": "AI-generated test package",
+      "travelers": {
+        "adults": 3,
+        "children": 1,
+        "drivers": 2
+      },
+      "transport": "租车自驾（SUV，待确认）",
+      "planningNotes": [
+        "已确认：8 月 4 日在呼玛过夜，不去十八站。",
+        "已删除：桃山温泉、五营、嘉荫恐龙园、黑河停留。",
+        "乌苏里浅滩与五大连池抵达日下午项目均设为可选。",
+        "酒店、航班、租车订单、实时道路与景区信息均待确认。"
+      ],
+      "dateStart": "2026-07-31",
+      "dateEnd": "2026-08-10",
+      "mapProvider": "amap"
+    },
+    "days": [
+      {
+        "date": "2026-07-31",
+        "dateOriginal": "2026-07-31",
+        "theme": "抵达与取车",
+        "route": "抵达哈尔滨",
+        "weatherLocation": {
+          "name": "哈尔滨",
+          "lat": 45.8038,
+          "lng": 126.535
+        },
+        "eventIds": [
+          "hlj-20260731-arrival-flight",
+          "hlj-20260731-rental-car",
+          "hlj-20260731-hotel-harbin"
+        ],
+        "brief": {
+          "hotelAtStart": null,
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260731-hotel-harbin",
+              "name": "哈尔滨机场周边酒店（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "哈尔滨机场周边酒店（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260731-arrival-flight",
+            "hlj-20260731-rental-car"
+          ],
+          "importantEventIds": [
+            "hlj-20260731-arrival-flight",
+            "hlj-20260731-rental-car",
+            "hlj-20260731-hotel-harbin"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-01",
+        "dateOriginal": "2026-08-01",
+        "theme": "首日转场",
+        "route": "哈尔滨 → 伊春",
+        "weatherLocation": {
+          "name": "伊春",
+          "lat": 47.7275,
+          "lng": 128.8993
+        },
+        "eventIds": [
+          "hlj-20260801-drive-harbin-yichun",
+          "hlj-20260801-hotel-yichun",
+          "hlj-20260801-rest-yichun"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "哈尔滨机场周边酒店（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260801-hotel-yichun",
+              "name": "伊春市区酒店（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "伊春市区酒店（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260801-drive-harbin-yichun"
+          ],
+          "importantEventIds": [
+            "hlj-20260801-drive-harbin-yichun",
+            "hlj-20260801-hotel-yichun"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-02",
+        "dateOriginal": "2026-08-02",
+        "theme": "花岗岩石林",
+        "route": "伊春 → 汤旺河",
+        "weatherLocation": {
+          "name": "汤旺河",
+          "lat": 48.455,
+          "lng": 129.572
+        },
+        "eventIds": [
+          "hlj-20260802-drive-yichun-tangwanghe",
+          "hlj-20260802-tangwanghe",
+          "hlj-20260802-hotel-tangwanghe"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "伊春市区酒店（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260802-hotel-tangwanghe",
+              "name": "汤旺河住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "汤旺河住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260802-drive-yichun-tangwanghe"
+          ],
+          "importantEventIds": [
+            "hlj-20260802-drive-yichun-tangwanghe",
+            "hlj-20260802-tangwanghe",
+            "hlj-20260802-hotel-tangwanghe"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-03",
+        "dateOriginal": "2026-08-03",
+        "theme": "峡谷与瀑布",
+        "route": "汤旺河 → 茅兰沟 → 嘉荫",
+        "weatherLocation": {
+          "name": "嘉荫",
+          "lat": 48.888,
+          "lng": 130.398
+        },
+        "eventIds": [
+          "hlj-20260803-drive-tangwanghe-maolangou",
+          "hlj-20260803-maolangou",
+          "hlj-20260803-drive-maolangou-jiayin",
+          "hlj-20260803-hotel-jiayin"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "汤旺河住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260803-hotel-jiayin",
+              "name": "嘉荫县城住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "嘉荫县城住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260803-drive-tangwanghe-maolangou",
+            "hlj-20260803-drive-maolangou-jiayin"
+          ],
+          "importantEventIds": [
+            "hlj-20260803-drive-tangwanghe-maolangou",
+            "hlj-20260803-maolangou",
+            "hlj-20260803-hotel-jiayin"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-04",
+        "dateOriginal": "2026-08-04",
+        "theme": "呼玛缓冲夜",
+        "route": "嘉荫 → 呼玛",
+        "weatherLocation": {
+          "name": "呼玛",
+          "lat": 51.725,
+          "lng": 126.652
+        },
+        "eventIds": [
+          "hlj-20260804-drive-jiayin-huma",
+          "hlj-20260804-hotel-huma",
+          "hlj-20260804-huma-rest"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "嘉荫县城住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260804-hotel-huma",
+              "name": "呼玛县城住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "呼玛县城住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260804-drive-jiayin-huma"
+          ],
+          "importantEventIds": [
+            "hlj-20260804-drive-jiayin-huma",
+            "hlj-20260804-hotel-huma",
+            "hlj-20260804-huma-rest"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-05",
+        "dateOriginal": "2026-08-05",
+        "theme": "边境公路长转场",
+        "route": "呼玛 → 北红村",
+        "weatherLocation": {
+          "name": "北红村",
+          "lat": 53.6,
+          "lng": 122.3
+        },
+        "eventIds": [
+          "hlj-20260805-drive-huma-beihong",
+          "hlj-20260805-hotel-beihong"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "呼玛县城住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260805-hotel-beihong",
+              "name": "北红村民宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "北红村民宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260805-drive-huma-beihong"
+          ],
+          "importantEventIds": [
+            "hlj-20260805-drive-huma-beihong",
+            "hlj-20260805-hotel-beihong"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "黑龙江大回环",
+        "route": "北红村 → 龙江第一湾 → 北极村",
+        "weatherLocation": {
+          "name": "北极村",
+          "lat": 53.478,
+          "lng": 122.35
+        },
+        "eventIds": [
+          "hlj-20260806-longjiang-first-bay",
+          "hlj-20260806-wusuli-optional",
+          "hlj-20260806-drive-beihong-beiji",
+          "hlj-20260806-north-pole-village",
+          "hlj-20260806-hotel-beiji"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "北红村民宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260806-hotel-beiji",
+              "name": "北极村住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "北极村住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260806-drive-beihong-beiji"
+          ],
+          "importantEventIds": [
+            "hlj-20260806-longjiang-first-bay",
+            "hlj-20260806-drive-beihong-beiji",
+            "hlj-20260806-north-pole-village",
+            "hlj-20260806-hotel-beiji"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "theme": "林区转场",
+        "route": "北极村 → 加格达奇",
+        "weatherLocation": {
+          "name": "加格达奇",
+          "lat": 50.412,
+          "lng": 124.117
+        },
+        "eventIds": [
+          "hlj-20260807-drive-beiji-jiagedaqi",
+          "hlj-20260807-hotel-jiagedaqi"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "北极村住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260807-hotel-jiagedaqi",
+              "name": "加格达奇市区住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "加格达奇市区住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260807-drive-beiji-jiagedaqi"
+          ],
+          "importantEventIds": [
+            "hlj-20260807-drive-beiji-jiagedaqi",
+            "hlj-20260807-hotel-jiagedaqi"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "theme": "火山地貌前夜",
+        "route": "加格达奇 → 五大连池",
+        "weatherLocation": {
+          "name": "五大连池",
+          "lat": 48.515,
+          "lng": 126.204
+        },
+        "eventIds": [
+          "hlj-20260808-drive-jiagedaqi-wudalianchi",
+          "hlj-20260808-hotel-wudalianchi",
+          "hlj-20260808-wudalianchi-light"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "加格达奇市区住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260808-hotel-wudalianchi",
+              "name": "五大连池景区周边住宿（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "五大连池景区周边住宿（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260808-drive-jiagedaqi-wudalianchi"
+          ],
+          "importantEventIds": [
+            "hlj-20260808-drive-jiagedaqi-wudalianchi",
+            "hlj-20260808-hotel-wudalianchi"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "老黑山与返城",
+        "route": "五大连池 → 哈尔滨",
+        "weatherLocation": {
+          "name": "哈尔滨",
+          "lat": 45.8038,
+          "lng": 126.535
+        },
+        "eventIds": [
+          "hlj-20260809-laohei-mountain",
+          "hlj-20260809-drive-wudalianchi-harbin",
+          "hlj-20260809-hotel-harbin-center",
+          "hlj-20260809-central-avenue"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "五大连池景区周边住宿（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "hlj-20260809-hotel-harbin-center",
+              "name": "哈尔滨中央大街附近酒店（待确认）",
+              "address": "待确认"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "哈尔滨中央大街附近酒店（待确认）",
+            "address": "待确认"
+          },
+          "keyTransportEventIds": [
+            "hlj-20260809-drive-wudalianchi-harbin"
+          ],
+          "importantEventIds": [
+            "hlj-20260809-laohei-mountain",
+            "hlj-20260809-drive-wudalianchi-harbin",
+            "hlj-20260809-hotel-harbin-center"
+          ]
+        }
+      },
+      {
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "theme": "还车离境",
+        "route": "哈尔滨 → 太平机场",
+        "weatherLocation": {
+          "name": "哈尔滨",
+          "lat": 45.8038,
+          "lng": 126.535
+        },
+        "eventIds": [
+          "hlj-20260810-drive-airport-return-car",
+          "hlj-20260810-departure-flight"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "哈尔滨中央大街附近酒店（待确认）",
+            "address": "待确认"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": null,
+          "keyTransportEventIds": [
+            "hlj-20260810-drive-airport-return-car",
+            "hlj-20260810-departure-flight"
+          ],
+          "importantEventIds": [
+            "hlj-20260810-drive-airport-return-car",
+            "hlj-20260810-departure-flight"
+          ]
+        }
+      }
+    ],
+    "events": [
+      {
+        "id": "hlj-20260731-arrival-flight",
+        "date": "2026-07-31",
+        "dateOriginal": "2026-07-31",
+        "theme": "",
+        "timeStart": null,
+        "timeEnd": null,
+        "time": {
+          "original": "",
+          "start": null,
+          "end": null,
+          "kind": "unscheduled"
+        },
+        "what": "抵达哈尔滨太平国际机场",
+        "place": "哈尔滨太平国际机场",
+        "address": "哈尔滨太平国际机场",
+        "note": "晚间抵达；航班号、落地时间与航站楼待确认。",
+        "notes": "晚间抵达；航班号、落地时间与航站楼待确认。",
+        "briefSummary": "晚间抵达；航班号、落地时间与航站楼待确认。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "flight",
+          "mode": "flight",
+          "title": "抵达哈尔滨",
+          "route": "出发地（待确认） → 哈尔滨太平国际机场",
+          "service": "航班号待确认",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": null,
+              "arrival": null,
+              "detail": "仅记录抵达；实际航班信息待补。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨太平国际机场",
+            "query": "哈尔滨太平国际机场",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260731-rental-car",
+        "date": "2026-07-31",
+        "dateOriginal": "2026-07-31",
+        "theme": "",
+        "timeStart": null,
+        "timeEnd": null,
+        "time": {
+          "original": "",
+          "start": null,
+          "end": null,
+          "kind": "unscheduled"
+        },
+        "what": "机场取车并登记两位驾驶人",
+        "place": "哈尔滨太平国际机场租车点",
+        "address": "待确认",
+        "note": "建议 SUV；确认两位驾驶人均写入租车合同，并确认儿童安全座椅、保险与异地救援条款。",
+        "notes": "建议 SUV；确认两位驾驶人均写入租车合同，并确认儿童安全座椅、保险与异地救援条款。",
+        "briefSummary": "建议 SUV；确认两位驾驶人均写入租车合同，并确认儿童安全座椅、保险与异地救援条款。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "机场取车",
+          "route": "哈尔滨太平国际机场 → 租车柜台",
+          "service": "租车自驾（订单待确认）",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": null,
+              "arrival": null,
+              "detail": "取车后核验车况、备胎/补胎工具与油量。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨太平国际机场租车点",
+            "query": "哈尔滨太平国际机场 租车",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260731-hotel-harbin",
+        "date": "2026-07-31",
+        "dateOriginal": "2026-07-31",
+        "theme": "",
+        "timeStart": null,
+        "timeEnd": null,
+        "time": {
+          "original": "",
+          "start": null,
+          "end": null,
+          "kind": "unscheduled"
+        },
+        "what": "入住哈尔滨机场周边酒店（待确认）",
+        "place": "哈尔滨机场周边酒店（待确认）",
+        "address": "待确认",
+        "note": "优先选机场附近，避免晚到后再进入市区。",
+        "notes": "优先选机场附近，避免晚到后再进入市区。",
+        "briefSummary": "优先选机场附近，避免晚到后再进入市区。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "哈尔滨机场周边酒店（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨太平机场附近",
+            "query": "哈尔滨太平国际机场附近酒店",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260801-drive-harbin-yichun",
+        "date": "2026-08-01",
+        "dateOriginal": "2026-08-01",
+        "theme": "",
+        "timeStart": "07:30",
+        "timeEnd": "13:30",
+        "time": {
+          "original": "07:30–13:30",
+          "start": "07:30",
+          "end": "13:30",
+          "kind": "range"
+        },
+        "what": "自驾：哈尔滨 → 伊春市区",
+        "place": "哈尔滨至伊春",
+        "address": "哈尔滨 → 伊春市区",
+        "note": "原定桃山温泉已删。首日以抵达、补给和早休息为主；预计车程仅作排程参考，以实时导航为准。",
+        "notes": "原定桃山温泉已删。首日以抵达、补给和早休息为主；预计车程仅作排程参考，以实时导航为准。",
+        "briefSummary": "原定桃山温泉已删。首日以抵达、补给和早休息为主；预计车程仅作排程参考，以实时导航为准。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "哈尔滨 → 伊春",
+          "route": "哈尔滨市区/机场周边 → 伊春市区",
+          "service": "租车自驾（SUV，订单待确认）",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "07:30",
+              "arrival": "13:30",
+              "detail": "建议至少安排一次服务区休息与换手驾驶。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "伊春市区",
+            "query": "黑龙江省伊春市",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260801-hotel-yichun",
+        "date": "2026-08-01",
+        "dateOriginal": "2026-08-01",
+        "theme": "",
+        "timeStart": "15:00",
+        "timeEnd": null,
+        "time": {
+          "original": "15:00",
+          "start": "15:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住伊春市区酒店（待确认）",
+        "place": "伊春市区酒店（待确认）",
+        "address": "待确认",
+        "note": "下午只做入住、补给、晚餐与早休息，不再安排城市景点。",
+        "notes": "下午只做入住、补给、晚餐与早休息，不再安排城市景点。",
+        "briefSummary": "下午只做入住、补给、晚餐与早休息，不再安排城市景点。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "伊春市区酒店（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "伊春市区酒店",
+            "query": "黑龙江省伊春市区 酒店",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260801-rest-yichun",
+        "date": "2026-08-01",
+        "dateOriginal": "2026-08-01",
+        "theme": "",
+        "timeStart": "18:00",
+        "timeEnd": null,
+        "time": {
+          "original": "18:00",
+          "start": "18:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "补给、晚餐与调整",
+        "place": "伊春市区",
+        "address": "黑龙江省伊春市",
+        "note": "为次日汤旺河景区预留体力；不安排博物馆或水上公园。",
+        "notes": "为次日汤旺河景区预留体力；不安排博物馆或水上公园。",
+        "briefSummary": "为次日汤旺河景区预留体力；不安排博物馆或水上公园。",
+        "displayKind": "note",
+        "category": "attention",
+        "categories": [
+          "attention"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": false,
+        "importance": {
+          "level": "normal",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "伊春市区",
+            "query": "黑龙江省伊春市",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260802-drive-yichun-tangwanghe",
+        "date": "2026-08-02",
+        "dateOriginal": "2026-08-02",
+        "theme": "",
+        "timeStart": "08:30",
+        "timeEnd": "10:30",
+        "time": {
+          "original": "08:30–10:30",
+          "start": "08:30",
+          "end": "10:30",
+          "kind": "range"
+        },
+        "what": "自驾：伊春市区 → 汤旺河",
+        "place": "伊春至汤旺河",
+        "address": "伊春市区 → 汤旺河区",
+        "note": "原行程中的五营已删，集中游览汤旺河林海奇石，避免连续重复的森林体验。",
+        "notes": "原行程中的五营已删，集中游览汤旺河林海奇石，避免连续重复的森林体验。",
+        "briefSummary": "原行程中的五营已删，集中游览汤旺河林海奇石，避免连续重复的森林体验。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "伊春 → 汤旺河",
+          "route": "伊春市区 → 汤旺河林海奇石景区",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "08:30",
+              "arrival": "10:30",
+              "detail": "时间为排程估算；以当日实时导航、停车与景区入园时间为准。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "汤旺河林海奇石景区",
+            "query": "汤旺河林海奇石景区",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260802-tangwanghe",
+        "date": "2026-08-02",
+        "dateOriginal": "2026-08-02",
+        "theme": "",
+        "timeStart": "11:00",
+        "timeEnd": "16:00",
+        "time": {
+          "original": "11:00–16:00",
+          "start": "11:00",
+          "end": "16:00",
+          "kind": "range"
+        },
+        "what": "游览汤旺河林海奇石景区",
+        "place": "汤旺河林海奇石景区",
+        "address": "汤旺河林海奇石景区",
+        "note": "重点看花岗岩石林、巨石和林海；确认当日门票、观光车和最后入园时间。",
+        "notes": "重点看花岗岩石林、巨石和林海；确认当日门票、观光车和最后入园时间。",
+        "briefSummary": "重点看花岗岩石林、巨石和林海；确认当日门票、观光车和最后入园时间。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "汤旺河林海奇石景区",
+            "query": "汤旺河林海奇石景区",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260802-hotel-tangwanghe",
+        "date": "2026-08-02",
+        "dateOriginal": "2026-08-02",
+        "theme": "",
+        "timeStart": "17:00",
+        "timeEnd": null,
+        "time": {
+          "original": "17:00",
+          "start": "17:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住汤旺河住宿（待确认）",
+        "place": "汤旺河区住宿（待确认）",
+        "address": "待确认",
+        "note": "建议住景区周边或汤旺河区，便于次日前往茅兰沟。",
+        "notes": "建议住景区周边或汤旺河区，便于次日前往茅兰沟。",
+        "briefSummary": "建议住景区周边或汤旺河区，便于次日前往茅兰沟。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "汤旺河住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "汤旺河区",
+            "query": "黑龙江省伊春市汤旺河区",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260803-drive-tangwanghe-maolangou",
+        "date": "2026-08-03",
+        "dateOriginal": "2026-08-03",
+        "theme": "",
+        "timeStart": "08:00",
+        "timeEnd": "11:30",
+        "time": {
+          "original": "08:00–11:30",
+          "start": "08:00",
+          "end": "11:30",
+          "kind": "range"
+        },
+        "what": "自驾：汤旺河 → 茅兰沟国家森林公园",
+        "place": "汤旺河至茅兰沟",
+        "address": "汤旺河区 → 茅兰沟国家森林公园",
+        "note": "当天以峡谷和瀑布为唯一主景；车程为保守排程，按实时导航调整。",
+        "notes": "当天以峡谷和瀑布为唯一主景；车程为保守排程，按实时导航调整。",
+        "briefSummary": "当天以峡谷和瀑布为唯一主景；车程为保守排程，按实时导航调整。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "汤旺河 → 茅兰沟",
+          "route": "汤旺河区 → 茅兰沟国家森林公园",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "08:00",
+              "arrival": "11:30",
+              "detail": "请预留山路、停车和午餐时间。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "茅兰沟国家森林公园",
+            "query": "茅兰沟国家森林公园",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260803-maolangou",
+        "date": "2026-08-03",
+        "dateOriginal": "2026-08-03",
+        "theme": "",
+        "timeStart": "11:30",
+        "timeEnd": "16:00",
+        "time": {
+          "original": "11:30–16:00",
+          "start": "11:30",
+          "end": "16:00",
+          "kind": "range"
+        },
+        "what": "游览茅兰沟国家森林公园",
+        "place": "茅兰沟国家森林公园",
+        "address": "茅兰沟国家森林公园",
+        "note": "重点为峡谷、溪流、瀑布和深潭；雨后栈道湿滑，带小孩时按体力缩短步道。",
+        "notes": "重点为峡谷、溪流、瀑布和深潭；雨后栈道湿滑，带小孩时按体力缩短步道。",
+        "briefSummary": "重点为峡谷、溪流、瀑布和深潭；雨后栈道湿滑，带小孩时按体力缩短步道。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "茅兰沟国家森林公园",
+            "query": "茅兰沟国家森林公园",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260803-drive-maolangou-jiayin",
+        "date": "2026-08-03",
+        "dateOriginal": "2026-08-03",
+        "theme": "",
+        "timeStart": "16:00",
+        "timeEnd": "17:30",
+        "time": {
+          "original": "16:00–17:30",
+          "start": "16:00",
+          "end": "17:30",
+          "kind": "range"
+        },
+        "what": "自驾：茅兰沟 → 嘉荫县城",
+        "place": "茅兰沟至嘉荫县",
+        "address": "茅兰沟国家森林公园 → 嘉荫县",
+        "note": "嘉荫恐龙园已删；抵达后以江边散步、晚餐和恢复体力为主。",
+        "notes": "嘉荫恐龙园已删；抵达后以江边散步、晚餐和恢复体力为主。",
+        "briefSummary": "嘉荫恐龙园已删；抵达后以江边散步、晚餐和恢复体力为主。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "茅兰沟 → 嘉荫",
+          "route": "茅兰沟国家森林公园 → 嘉荫县城",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "16:00",
+              "arrival": "17:30",
+              "detail": "无需再加研学型景点。"
+            }
+          ]
+        },
+        "important": false,
+        "importance": {
+          "level": "normal",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "嘉荫县",
+            "query": "黑龙江省伊春市嘉荫县",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260803-hotel-jiayin",
+        "date": "2026-08-03",
+        "dateOriginal": "2026-08-03",
+        "theme": "",
+        "timeStart": "18:00",
+        "timeEnd": null,
+        "time": {
+          "original": "18:00",
+          "start": "18:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住嘉荫县城住宿（待确认）",
+        "place": "嘉荫县城住宿（待确认）",
+        "address": "待确认",
+        "note": "选择县城或靠近黑龙江江边的住宿；酒店名称、停车和地址待确认。",
+        "notes": "选择县城或靠近黑龙江江边的住宿；酒店名称、停车和地址待确认。",
+        "briefSummary": "选择县城或靠近黑龙江江边的住宿；酒店名称、停车和地址待确认。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "嘉荫县城住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "嘉荫县城",
+            "query": "黑龙江省伊春市嘉荫县城",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260804-drive-jiayin-huma",
+        "date": "2026-08-04",
+        "dateOriginal": "2026-08-04",
+        "theme": "",
+        "timeStart": "08:30",
+        "timeEnd": "15:30",
+        "time": {
+          "original": "08:30–15:30",
+          "start": "08:30",
+          "end": "15:30",
+          "kind": "range"
+        },
+        "what": "自驾：嘉荫 → 呼玛",
+        "place": "嘉荫至呼玛",
+        "address": "嘉荫县 → 呼玛县",
+        "note": "取消黑河停留，改在呼玛过夜；这是为拆解后续长距离自驾而设的缓冲日。中途只安排午餐、加油和休息。",
+        "notes": "取消黑河停留，改在呼玛过夜；这是为拆解后续长距离自驾而设的缓冲日。中途只安排午餐、加油和休息。",
+        "briefSummary": "取消黑河停留，改在呼玛过夜；这是为拆解后续长距离自驾而设的缓冲日。中途只安排午餐、加油和休息。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "嘉荫 → 呼玛",
+          "route": "嘉荫县 → 呼玛县",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "08:30",
+              "arrival": "15:30",
+              "detail": "以实时导航为准；不要再加入景点。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "呼玛县",
+            "query": "黑龙江省大兴安岭地区呼玛县",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260804-hotel-huma",
+        "date": "2026-08-04",
+        "dateOriginal": "2026-08-04",
+        "theme": "",
+        "timeStart": "16:00",
+        "timeEnd": null,
+        "time": {
+          "original": "16:00",
+          "start": "16:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住呼玛县城住宿（待确认）",
+        "place": "呼玛县城住宿（待确认）",
+        "address": "待确认",
+        "note": "这是本版路线的关键调整：呼玛作为正式休息点，不去十八站。",
+        "notes": "这是本版路线的关键调整：呼玛作为正式休息点，不去十八站。",
+        "briefSummary": "这是本版路线的关键调整：呼玛作为正式休息点，不去十八站。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "呼玛县城住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "呼玛县城",
+            "query": "黑龙江省大兴安岭地区呼玛县城",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260804-huma-rest",
+        "date": "2026-08-04",
+        "dateOriginal": "2026-08-04",
+        "theme": "",
+        "timeStart": "18:00",
+        "timeEnd": null,
+        "time": {
+          "original": "18:00",
+          "start": "18:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "晚餐、补给与早休息",
+        "place": "呼玛县城",
+        "address": "黑龙江省大兴安岭地区呼玛县",
+        "note": "补足油料、饮水、零食与常备药；次日为长距离边境道路自驾。",
+        "notes": "补足油料、饮水、零食与常备药；次日为长距离边境道路自驾。",
+        "briefSummary": "补足油料、饮水、零食与常备药；次日为长距离边境道路自驾。",
+        "displayKind": "note",
+        "category": "attention",
+        "categories": [
+          "attention"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "呼玛县城",
+            "query": "黑龙江省大兴安岭地区呼玛县城",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260805-drive-huma-beihong",
+        "date": "2026-08-05",
+        "dateOriginal": "2026-08-05",
+        "theme": "",
+        "timeStart": "06:30",
+        "timeEnd": "16:30",
+        "time": {
+          "original": "06:30–16:30",
+          "start": "06:30",
+          "end": "16:30",
+          "kind": "range"
+        },
+        "what": "自驾：呼玛 → 北红村",
+        "place": "呼玛至北红村",
+        "address": "呼玛县 → 北红村",
+        "note": "全程长距离自驾；建议出发前一晚按实时导航确认路线、施工、天气、加油点和抵达时间。当天不再排景点。",
+        "notes": "全程长距离自驾；建议出发前一晚按实时导航确认路线、施工、天气、加油点和抵达时间。当天不再排景点。",
+        "briefSummary": "全程长距离自驾；建议出发前一晚按实时导航确认路线、施工、天气、加油点和抵达时间。当天不再排景点。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "呼玛 → 北红村",
+          "route": "呼玛县 → 北红村",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "06:30",
+              "arrival": "16:30",
+              "detail": "请严格以实时导航与当日路况为准；安排多次服务区休息、换手驾驶和加油。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "北红村",
+            "query": "北红村 漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260805-hotel-beihong",
+        "date": "2026-08-05",
+        "dateOriginal": "2026-08-05",
+        "theme": "",
+        "timeStart": "17:00",
+        "timeEnd": null,
+        "time": {
+          "original": "17:00",
+          "start": "17:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住北红村民宿（待确认）",
+        "place": "北红村民宿（待确认）",
+        "address": "待确认",
+        "note": "预留傍晚江边散步与日落；不再赶路。",
+        "notes": "预留傍晚江边散步与日落；不再赶路。",
+        "briefSummary": "预留傍晚江边散步与日落；不再赶路。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "北红村民宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "北红村",
+            "query": "北红村 漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260806-longjiang-first-bay",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "timeStart": "08:30",
+        "timeEnd": "12:00",
+        "time": {
+          "original": "08:30–12:00",
+          "start": "08:30",
+          "end": "12:00",
+          "kind": "range"
+        },
+        "what": "游览龙江第一湾",
+        "place": "龙江第一湾景区",
+        "address": "龙江第一湾景区",
+        "note": "保留本段最有高空视野的江湾景观。登高台阶较多，带小孩时可按体力调整。",
+        "notes": "保留本段最有高空视野的江湾景观。登高台阶较多，带小孩时可按体力调整。",
+        "briefSummary": "保留本段最有高空视野的江湾景观。登高台阶较多，带小孩时可按体力调整。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "龙江第一湾景区",
+            "query": "龙江第一湾景区",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260806-wusuli-optional",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "timeStart": "12:00",
+        "timeEnd": "13:30",
+        "time": {
+          "original": "12:00–13:30",
+          "start": "12:00",
+          "end": "13:30",
+          "kind": "range"
+        },
+        "what": "可选：乌苏里浅滩",
+        "place": "乌苏里浅滩景区",
+        "address": "乌苏里浅滩景区",
+        "note": "仅在天气、体力和出发时间都合适时前往；其核心价值是“中国最北点”标签，优先级低于龙江第一湾。",
+        "notes": "仅在天气、体力和出发时间都合适时前往；其核心价值是“中国最北点”标签，优先级低于龙江第一湾。",
+        "briefSummary": "仅在天气、体力和出发时间都合适时前往；其核心价值是“中国最北点”标签，优先级低于龙江第一湾。",
+        "displayKind": "event",
+        "category": "alternative",
+        "categories": [
+          "alternative"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": false,
+        "importance": {
+          "level": "normal",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": true,
+          "keywordHits": [
+            "天气",
+            "体力",
+            "时间"
+          ],
+          "sourceText": "可选项目；状态不佳时直接省略。"
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "乌苏里浅滩景区",
+            "query": "乌苏里浅滩景区",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260806-drive-beihong-beiji",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "timeStart": "14:00",
+        "timeEnd": "16:00",
+        "time": {
+          "original": "14:00–16:00",
+          "start": "14:00",
+          "end": "16:00",
+          "kind": "range"
+        },
+        "what": "自驾：北红村 → 北极村",
+        "place": "北红村至北极村",
+        "address": "北红村 → 北极村",
+        "note": "乌苏里浅滩是否停留会直接影响实际出发时间。",
+        "notes": "乌苏里浅滩是否停留会直接影响实际出发时间。",
+        "briefSummary": "乌苏里浅滩是否停留会直接影响实际出发时间。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "北红村 → 北极村",
+          "route": "北红村 → 北极村",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "14:00",
+              "arrival": "16:00",
+              "detail": "以是否游览乌苏里浅滩及实时路况为准。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "北极村",
+            "query": "北极村 漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260806-north-pole-village",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "timeStart": "16:30",
+        "timeEnd": "19:30",
+        "time": {
+          "original": "16:30–19:30",
+          "start": "16:30",
+          "end": "19:30",
+          "kind": "range"
+        },
+        "what": "北极村“找北”打卡与入住",
+        "place": "北极村",
+        "address": "北极村 漠河市",
+        "note": "只选最北邮局、神州北极石碑等少量重点打卡；避免把北极村当成密集刷点日。",
+        "notes": "只选最北邮局、神州北极石碑等少量重点打卡；避免把北极村当成密集刷点日。",
+        "briefSummary": "只选最北邮局、神州北极石碑等少量重点打卡；避免把北极村当成密集刷点日。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "北极村",
+            "query": "北极村 漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          },
+          {
+            "kind": "search",
+            "label": "最北邮局",
+            "query": "北极村 最北邮局",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260806-hotel-beiji",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "timeStart": "19:30",
+        "timeEnd": null,
+        "time": {
+          "original": "19:30",
+          "start": "19:30",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住北极村住宿（待确认）",
+        "place": "北极村住宿（待确认）",
+        "address": "待确认",
+        "note": "优先选择停车方便、靠近景区接驳点的住宿。",
+        "notes": "优先选择停车方便、靠近景区接驳点的住宿。",
+        "briefSummary": "优先选择停车方便、靠近景区接驳点的住宿。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "北极村住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "北极村",
+            "query": "北极村 漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260807-drive-beiji-jiagedaqi",
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "theme": "",
+        "timeStart": "07:00",
+        "timeEnd": "17:30",
+        "time": {
+          "original": "07:00–17:30",
+          "start": "07:00",
+          "end": "17:30",
+          "kind": "range"
+        },
+        "what": "自驾：北极村 → 加格达奇",
+        "place": "北极村至加格达奇",
+        "address": "北极村 → 加格达奇区",
+        "note": "纯转场日。漠河县城仅作为加油、午餐和补给点，不安排极光广场等额外打卡。",
+        "notes": "纯转场日。漠河县城仅作为加油、午餐和补给点，不安排极光广场等额外打卡。",
+        "briefSummary": "纯转场日。漠河县城仅作为加油、午餐和补给点，不安排极光广场等额外打卡。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "北极村 → 加格达奇",
+          "route": "北极村 → 漠河县城（补给）→ 加格达奇区",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "07:00",
+              "arrival": "17:30",
+              "detail": "长距离林区道路；不增加景点，抵达时间以实时导航为准。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "漠河县城",
+            "query": "黑龙江省大兴安岭地区漠河市",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          },
+          {
+            "kind": "search",
+            "label": "加格达奇区",
+            "query": "黑龙江省大兴安岭地区加格达奇区",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260807-hotel-jiagedaqi",
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "theme": "",
+        "timeStart": "18:00",
+        "timeEnd": null,
+        "time": {
+          "original": "18:00",
+          "start": "18:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住加格达奇市区住宿（待确认）",
+        "place": "加格达奇市区住宿（待确认）",
+        "address": "待确认",
+        "note": "抵达后优先晚餐与休息；不再安排观光。",
+        "notes": "抵达后优先晚餐与休息；不再安排观光。",
+        "briefSummary": "抵达后优先晚餐与休息；不再安排观光。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "加格达奇市区住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "加格达奇区",
+            "query": "黑龙江省大兴安岭地区加格达奇区",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260808-drive-jiagedaqi-wudalianchi",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "theme": "",
+        "timeStart": "08:30",
+        "timeEnd": "14:00",
+        "time": {
+          "original": "08:30–14:00",
+          "start": "08:30",
+          "end": "14:00",
+          "kind": "range"
+        },
+        "what": "自驾：加格达奇 → 五大连池",
+        "place": "加格达奇至五大连池",
+        "address": "加格达奇区 → 五大连池风景区",
+        "note": "以抵达五大连池、入住和放松为主，下午只安排一个轻量项目。",
+        "notes": "以抵达五大连池、入住和放松为主，下午只安排一个轻量项目。",
+        "briefSummary": "以抵达五大连池、入住和放松为主，下午只安排一个轻量项目。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "加格达奇 → 五大连池",
+          "route": "加格达奇区 → 五大连池风景区",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "08:30",
+              "arrival": "14:00",
+              "detail": "车程与路线以当日实时导航为准。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "五大连池风景区",
+            "query": "五大连池风景区",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260808-hotel-wudalianchi",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "theme": "",
+        "timeStart": "14:30",
+        "timeEnd": null,
+        "time": {
+          "original": "14:30",
+          "start": "14:30",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住五大连池景区周边住宿（待确认）",
+        "place": "五大连池景区周边住宿（待确认）",
+        "address": "待确认",
+        "note": "优先选便于次日早起前往老黑山的住宿。",
+        "notes": "优先选便于次日早起前往老黑山的住宿。",
+        "briefSummary": "优先选便于次日早起前往老黑山的住宿。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "五大连池景区周边住宿（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "五大连池风景区",
+            "query": "五大连池风景区",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260808-wudalianchi-light",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "theme": "",
+        "timeStart": "16:00",
+        "timeEnd": "18:00",
+        "time": {
+          "original": "16:00–18:00",
+          "start": "16:00",
+          "end": "18:00",
+          "kind": "range"
+        },
+        "what": "二选一轻量游览：温泊或北饮泉",
+        "place": "五大连池风景区",
+        "address": "五大连池风景区",
+        "note": "只选一处，避免抵达日继续赶景点；老黑山留给次日完整游览。",
+        "notes": "只选一处，避免抵达日继续赶景点；老黑山留给次日完整游览。",
+        "briefSummary": "只选一处，避免抵达日继续赶景点；老黑山留给次日完整游览。",
+        "displayKind": "event",
+        "category": "alternative",
+        "categories": [
+          "alternative"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": false,
+        "importance": {
+          "level": "normal",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": true,
+          "keywordHits": [
+            "二选一",
+            "体力",
+            "到达时间"
+          ],
+          "sourceText": "温泊或北饮泉二选一。"
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "温泊景区",
+            "query": "五大连池 温泊",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          },
+          {
+            "kind": "search",
+            "label": "北饮泉",
+            "query": "五大连池 北饮泉",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260809-laohei-mountain",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "",
+        "timeStart": "08:00",
+        "timeEnd": "11:30",
+        "time": {
+          "original": "08:00–11:30",
+          "start": "08:00",
+          "end": "11:30",
+          "kind": "range"
+        },
+        "what": "游览老黑山火山口",
+        "place": "老黑山",
+        "address": "五大连池风景区 老黑山",
+        "note": "本线最不可替代的火山和熔岩地貌；完整走完后直接返哈尔滨，不再额外叠加北饮泉。",
+        "notes": "本线最不可替代的火山和熔岩地貌；完整走完后直接返哈尔滨，不再额外叠加北饮泉。",
+        "briefSummary": "本线最不可替代的火山和熔岩地貌；完整走完后直接返哈尔滨，不再额外叠加北饮泉。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "老黑山",
+            "query": "五大连池风景区 老黑山",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260809-drive-wudalianchi-harbin",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "",
+        "timeStart": "12:00",
+        "timeEnd": "17:30",
+        "time": {
+          "original": "12:00–17:30",
+          "start": "12:00",
+          "end": "17:30",
+          "kind": "range"
+        },
+        "what": "自驾：五大连池 → 哈尔滨市区",
+        "place": "五大连池至哈尔滨",
+        "address": "五大连池风景区 → 哈尔滨市区",
+        "note": "离开景区后直返哈尔滨；抵达时间以实时导航为准。",
+        "notes": "离开景区后直返哈尔滨；抵达时间以实时导航为准。",
+        "briefSummary": "离开景区后直返哈尔滨；抵达时间以实时导航为准。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "五大连池 → 哈尔滨",
+          "route": "五大连池风景区 → 哈尔滨市区",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "12:00",
+              "arrival": "17:30",
+              "detail": "下午可轮换驾驶，预留堵车、加油和入城时间。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨中央大街",
+            "query": "哈尔滨市道里区中央大街",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260809-hotel-harbin-center",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "",
+        "timeStart": "18:00",
+        "timeEnd": null,
+        "time": {
+          "original": "18:00",
+          "start": "18:00",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "入住哈尔滨中央大街附近酒店（待确认）",
+        "place": "中央大街附近酒店（待确认）",
+        "address": "待确认",
+        "note": "尽量选择有停车条件或明确停车安排的住宿；次日需前往机场还车。",
+        "notes": "尽量选择有停车条件或明确停车安排的住宿；次日需前往机场还车。",
+        "briefSummary": "尽量选择有停车条件或明确停车安排的住宿；次日需前往机场还车。",
+        "displayKind": "event",
+        "category": "hotel",
+        "categories": [
+          "hotel"
+        ],
+        "accommodation": {
+          "name": "哈尔滨中央大街附近酒店（待确认）",
+          "address": "待确认"
+        },
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨中央大街",
+            "query": "哈尔滨市道里区中央大街",
+            "source": "ai-generated-plan",
+            "confidence": "medium",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260809-central-avenue",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "",
+        "timeStart": "19:00",
+        "timeEnd": "21:00",
+        "time": {
+          "original": "19:00–21:00",
+          "start": "19:00",
+          "end": "21:00",
+          "kind": "range"
+        },
+        "what": "中央大街与圣索菲亚教堂夜游",
+        "place": "中央大街 / 圣索菲亚教堂",
+        "address": "哈尔滨市道里区",
+        "note": "不设硬性购物任务；红肠等伴手礼尽量今晚买完，避免占用离境日上午时间。",
+        "notes": "不设硬性购物任务；红肠等伴手礼尽量今晚买完，避免占用离境日上午时间。",
+        "briefSummary": "不设硬性购物任务；红肠等伴手礼尽量今晚买完，避免占用离境日上午时间。",
+        "displayKind": "event",
+        "category": "attraction",
+        "categories": [
+          "attraction"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": null,
+        "important": false,
+        "importance": {
+          "level": "normal",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "中央大街",
+            "query": "哈尔滨市道里区中央大街",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          },
+          {
+            "kind": "search",
+            "label": "圣索菲亚教堂",
+            "query": "哈尔滨圣索菲亚教堂",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260810-drive-airport-return-car",
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "theme": "",
+        "timeStart": "09:30",
+        "timeEnd": "10:30",
+        "time": {
+          "original": "09:30–10:30",
+          "start": "09:30",
+          "end": "10:30",
+          "kind": "range"
+        },
+        "what": "前往机场、加油并还车",
+        "place": "哈尔滨太平国际机场",
+        "address": "哈尔滨太平国际机场",
+        "note": "不安排道里菜市场。预留加油、验车、还车、托运和带孩子安检的缓冲时间。",
+        "notes": "不安排道里菜市场。预留加油、验车、还车、托运和带孩子安检的缓冲时间。",
+        "briefSummary": "不安排道里菜市场。预留加油、验车、还车、托运和带孩子安检的缓冲时间。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "other",
+          "mode": "other",
+          "title": "哈尔滨市区 → 太平机场还车点",
+          "route": "中央大街附近 → 哈尔滨太平国际机场",
+          "service": "租车自驾",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "09:30",
+              "arrival": "10:30",
+              "detail": "请按租车公司要求提前加满油，并留足还车验车时间。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨太平国际机场",
+            "query": "哈尔滨太平国际机场",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      },
+      {
+        "id": "hlj-20260810-departure-flight",
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "theme": "",
+        "timeStart": "12:50",
+        "timeEnd": null,
+        "time": {
+          "original": "12:50",
+          "start": "12:50",
+          "end": null,
+          "kind": "single"
+        },
+        "what": "哈尔滨太平国际机场离境航班",
+        "place": "哈尔滨太平国际机场",
+        "address": "哈尔滨太平国际机场",
+        "note": "原行程记录起飞时间为 12:50；航班号、航站楼和最终值机截止时间待确认。",
+        "notes": "原行程记录起飞时间为 12:50；航班号、航站楼和最终值机截止时间待确认。",
+        "briefSummary": "原行程记录起飞时间为 12:50；航班号、航站楼和最终值机截止时间待确认。",
+        "displayKind": "event",
+        "category": "transport",
+        "categories": [
+          "transport"
+        ],
+        "accommodation": null,
+        "transportationOriginal": "",
+        "transportCard": {
+          "kind": "flight",
+          "mode": "flight",
+          "title": "哈尔滨离境",
+          "route": "哈尔滨太平国际机场 → 目的地（待确认）",
+          "service": "航班号待确认",
+          "segments": [
+            {
+              "traveler": "三大一小；其中两人可驾驶",
+              "departure": "12:50",
+              "arrival": null,
+              "detail": "起飞时间按原行程录入；需以实际订单为准。"
+            }
+          ]
+        },
+        "important": true,
+        "importance": {
+          "level": "high",
+          "explicitRedCells": [],
+          "keywordHits": []
+        },
+        "status": "active",
+        "alternative": {
+          "isConditional": false,
+          "keywordHits": [],
+          "sourceText": ""
+        },
+        "urls": [],
+        "urlLabel": "",
+        "urlLabels": [],
+        "mapTargets": [
+          {
+            "kind": "search",
+            "label": "哈尔滨太平国际机场",
+            "query": "哈尔滨太平国际机场",
+            "source": "ai-generated-plan",
+            "confidence": "high",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "references": [],
+        "source": {
+          "type": "ai-generated-plan",
+          "description": "根据用户提供的原行程与后续修改生成；所有订单与实时路况均待确认。"
+        }
+      }
+    ]
+  },
+  "reviewNeeded": {
+    "tripId": "heilongjiang-north-loop-2026",
+    "metadata": {
+      "schemaVersion": 1,
+      "generatedAt": "2026-07-03",
+      "purpose": "待确认的行前事项；不把旅行途中执行的活动作为待办。",
+      "scope": {
+        "included": [
+          "pre_trip",
+          "before_day"
+        ],
+        "excluded": [
+          "during_trip"
+        ]
+      }
+    },
+    "items": [
+      {
+        "id": "task-confirm-flights",
+        "title": "确认哈尔滨往返航班号、抵达时间、航站楼与值机截止时间",
+        "type": "pre_trip",
+        "dueBeforeDate": "2026-07-24",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-07-31",
+        "relatedItemIds": [
+          "hlj-20260731-arrival-flight",
+          "hlj-20260810-departure-flight"
+        ],
+        "sourceNote": "原行程仅提供 8 月 10 日 12:50 起飞与 7 月 31 日晚到。",
+        "reason": "避免将规划时间误作实际航班时间。",
+        "deadlineConfidence": "medium"
+      },
+      {
+        "id": "task-rental-car-two-drivers",
+        "title": "确认 SUV 租车订单，并将两位驾驶人和儿童安全座椅写入订单",
+        "type": "pre_trip",
+        "dueBeforeDate": "2026-07-24",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-07-31",
+        "relatedItemId": "hlj-20260731-rental-car",
+        "sourceNote": "三大一小，其中两人可驾驶；原行程建议 SUV。",
+        "reason": "北部林区长距离自驾需要轮换驾驶与合规儿童乘车安排。",
+        "deadlineConfidence": "high"
+      },
+      {
+        "id": "task-book-accommodations",
+        "title": "确认各晚住宿、停车条件及可取消政策",
+        "type": "pre_trip",
+        "dueBeforeDate": "2026-07-17",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-07-31",
+        "relatedItemIds": [
+          "hlj-20260731-hotel-harbin",
+          "hlj-20260801-hotel-yichun",
+          "hlj-20260802-hotel-tangwanghe",
+          "hlj-20260803-hotel-jiayin",
+          "hlj-20260804-hotel-huma",
+          "hlj-20260805-hotel-beihong",
+          "hlj-20260806-hotel-beiji",
+          "hlj-20260807-hotel-jiagedaqi",
+          "hlj-20260808-hotel-wudalianchi",
+          "hlj-20260809-hotel-harbin-center"
+        ],
+        "sourceNote": "当前所有酒店均为待确认占位信息。",
+        "reason": "呼玛、北红村、北极村等节点是路线节奏的支点，不能只靠当天找房。",
+        "deadlineConfidence": "medium"
+      },
+      {
+        "id": "task-verify-huma-beihong-road",
+        "title": "出发前核对呼玛 → 北红村的实时路线、施工、天气、加油点与备用过夜点",
+        "type": "before_day",
+        "dueBeforeDate": "2026-08-04",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-08-05",
+        "relatedItemId": "hlj-20260805-drive-huma-beihong",
+        "sourceNote": "本版已确定在呼玛过夜、不去十八站；次日为全程最长、最依赖路况的自驾日。",
+        "reason": "G331/边境林区道路的施工、降雨和补给条件会直接影响当天是否能在天黑前抵达。",
+        "deadlineConfidence": "high"
+      },
+      {
+        "id": "task-confirm-scenic-tickets",
+        "title": "核对景区开放、门票、观光车与最后入园时间",
+        "type": "before_day",
+        "dueBeforeDate": "2026-07-29",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-08-02",
+        "relatedItemIds": [
+          "hlj-20260802-tangwanghe",
+          "hlj-20260803-maolangou",
+          "hlj-20260806-longjiang-first-bay",
+          "hlj-20260809-laohei-mountain"
+        ],
+        "sourceNote": "景区开放和接驳安排尚未提供。",
+        "reason": "这些是主景点，暑期开放时间、检票截止和观光车安排会影响当天动线。",
+        "deadlineConfidence": "medium"
+      },
+      {
+        "id": "task-final-airport-buffer",
+        "title": "复核 8 月 10 日机场还车路线、加油要求与航班值机缓冲",
+        "type": "before_day",
+        "dueBeforeDate": "2026-08-09",
+        "priority": "high",
+        "status": "needs_review",
+        "relatedDate": "2026-08-10",
+        "relatedItemIds": [
+          "hlj-20260810-drive-airport-return-car",
+          "hlj-20260810-departure-flight"
+        ],
+        "sourceNote": "原行程为 12:50 航班；本版不安排当天早市。",
+        "reason": "还车、验车、托运和暑期安检都需要余量。",
+        "deadlineConfidence": "high"
+      }
+    ]
+  },
+  "localData": null
+}
