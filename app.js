@@ -258,12 +258,14 @@ function normalizeTravelPackage(payload) {
 function normalizeImportedTransportCard(card = null, event = {}) {
   if (!card) return null;
   const segment = Array.isArray(card.segments) && card.segments.length ? card.segments[0] : {};
-  const modeMap = { flight: "flight", train: "train", bus: "bus", ferry: "boat", boat: "boat", other: "other" };
+  const modeMap = { flight: "flight", train: "train", bus: "bus", ferry: "boat", boat: "boat", drive: "drive", car: "drive", other: "other" };
   const mode = card.mode || modeMap[card.kind] || "other";
   const service = card.service || segment.service || segment.traveler || "";
   return {
     mode,
     title: card.title || event.what || "Transport",
+    from: card.from || card.origin || segment.from || "",
+    to: card.to || card.destination || segment.to || "",
     route: card.route || segment.detail || "",
     service,
     terminalNote: card.terminalNote || "",
@@ -451,8 +453,28 @@ async function deleteTravelPackage(tripId) {
 async function importSamplePackage() {
   const ok = window.confirm("导入内置示例旅程？\n\n示例只保存到这台设备，之后可以删除。");
   if (!ok) return;
-  const response = await fetch("sample/paris_260806.travel.json");
-  if (!response.ok) throw new Error("示例旅程读取失败");
+  const embedded = document.querySelector("#builtin-sample-trip")?.textContent?.trim();
+  if (embedded) {
+    const travelPackage = normalizeTravelPackage(JSON.parse(embedded));
+    await saveTravelPackage(travelPackage);
+    window.location.reload();
+    return;
+  }
+  const samplePaths = ["./sample/paris_260806.travel.json", "./public/sample/paris_260806.travel.json"];
+  let response = null;
+  for (const path of samplePaths) {
+    const sampleUrl = new URL(path, window.location.href);
+    try {
+      response = await fetch(sampleUrl.href);
+      if (response.ok) break;
+    } catch (error) {
+      if ("caches" in window) {
+        response = await caches.match(path) || await caches.match(sampleUrl.href);
+        if (response?.ok) break;
+      }
+    }
+  }
+  if (!response || !response.ok) throw new Error("示例旅程读取失败：请强制刷新页面，或确认你打开的是最新的 public/index.html。");
   const payload = await response.json();
   const travelPackage = normalizeTravelPackage(payload);
   await saveTravelPackage(travelPackage);
@@ -700,6 +722,15 @@ async function resetLocalDeviceData() {
   }
 }
 
+function lucideFileIcon(kind) {
+  const arrow = kind === "down"
+    ? '<path d="M12 11v6"/><path d="m9 14 3 3 3-3"/>'
+    : '<path d="M12 17v-6"/><path d="m9 14 3-3 3 3"/>';
+  const icon = createElement("span", "backup-button__icon");
+  icon.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>${arrow}</svg>`;
+  return icon;
+}
+
 async function renderBackupPanel() {
   if (!elements.backupPanel) return;
   let lastExported = "";
@@ -724,7 +755,7 @@ async function renderBackupPanel() {
   const exportButton = createElement("button", "backup-button");
   exportButton.type = "button";
   exportButton.disabled = !state.database || !state.rawItinerary;
-  exportButton.append(createElement("span", "backup-button__icon", "↥"));
+  exportButton.append(lucideFileIcon("up"));
   exportButton.append(createElement("span", "", "导出"));
   exportButton.addEventListener("click", async () => {
     exportButton.disabled = true;
@@ -742,7 +773,7 @@ async function renderBackupPanel() {
   const importButton = createElement("button", "backup-button backup-button--ghost");
   importButton.type = "button";
   importButton.disabled = !state.database;
-  importButton.append(createElement("span", "backup-button__icon", "↧"));
+  importButton.append(lucideFileIcon("down"));
   importButton.append(createElement("span", "", "导入"));
   importButton.addEventListener("click", () => elements.backupFileInput?.click());
   const resetButton = createElement("button", "backup-button backup-button--danger");
@@ -2149,7 +2180,11 @@ function appendQuickList(card, eventIds, mode) {
     const event = state.eventsById.get(id);
     if (!event || event.isDeleted) return;
     const item = createElement("li", "brief-list__item");
-    item.append(createElement("p", "brief-main", briefText(event, mode)));
+    if (mode === "transport" && event.transportCard) {
+      item.append(createTransportBrief(event));
+    } else {
+      item.append(createElement("p", "brief-main", briefText(event, mode)));
+    }
     if (mode === "important" && event.urls && event.urls.length) {
       item.append(createWebsiteLinks(event));
     }
@@ -2264,20 +2299,36 @@ function setViewMode(mode) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function cleanTransportDetail(detail, from, to) {
+  const text = String(detail || "").trim();
+  if (!text) return "";
+  const route = from && to ? `${from} → ${to}` : "";
+  return route ? text.replace(route, "").replace(/^[:：\s]+/, "").trim() : text;
+}
+
+function transportBriefText(event) {
+  const transport = event.transportCard;
+  const [from, to] = transportEndpoints(transport);
+  const segment = Array.isArray(transport.segments) && transport.segments.length ? transport.segments[0] : {};
+  const route = [from, to].filter(Boolean).join(" → ") || transport.route || event.what || "";
+  const time = [segment.departure, segment.arrival].filter(Boolean).join(" → ");
+  const detail = cleanTransportDetail(segment.detail || "", from, to);
+  const suffix = [time, detail].filter(Boolean).join("｜");
+  return suffix ? `${route}：${suffix}` : route;
+}
+
+function createTransportBrief(event) {
+  const row = createElement("div", "brief-transport-line");
+  const icon = createElement("span", "brief-transport-icon");
+  icon.innerHTML = transportIconMarkup(event.transportCard.mode);
+  row.append(icon, createElement("p", "brief-main", transportBriefText(event)));
+  return row;
+}
+
 function briefText(event, mode) {
   if (mode === "important" && event.briefSummary) return event.briefSummary;
   if (mode === "transport" && event.transportCard) {
-    const icons = { flight: "✈︎", train: "🚆", bus: "🚌", boat: "⛴", other: "→" };
-    const segmentLines = event.transportCard.segments.map((segment) => {
-      const traveler = segment.traveler ? `${segment.traveler} ` : "";
-      const times = segment.departure || segment.arrival
-        ? `${segment.departure || "—"} → ${segment.arrival || "—"}`
-        : "";
-      const terminalRoute = [segment.fromTerminal, segment.toTerminal].filter(Boolean).join(" → ");
-      const detail = event.transportCard.mode === "flight" && terminalRoute ? terminalRoute : segment.detail;
-      return `${traveler}${times}${detail ? ` · ${detail}` : ""}`.trim();
-    });
-    return [`${icons[event.transportCard.mode] || "→"} ${event.transportCard.title}`, ...segmentLines].join("\n");
+    return transportBriefText(event);
   }
   if (mode === "transport" && event.transportationOriginal) {
     const time = event.time.original && event.time.original !== "/" ? `${event.time.original} · ` : "";
@@ -2430,33 +2481,86 @@ function createMapActions(target) {
   return actions;
 }
 
-function renderTransportCard(transport) {
-  const icons = { flight: "✈︎", train: "🚆", bus: "🚌", boat: "⛴", other: "→" };
-  const panel = createElement("section", `transport-ticket transport-ticket--${transport.mode}`);
-  const heading = createElement("div", "transport-ticket__heading");
-  heading.append(createElement("span", "transport-icon", icons[transport.mode] || "→"));
-  const title = createElement("div");
-  title.append(createElement("p", "transport-mode", transport.title));
-  title.append(createElement("p", "transport-route", transport.route));
-  heading.append(title);
-  panel.append(heading);
-  if (transport.service) panel.append(createElement("p", "transport-service", transport.service));
-  transport.segments.forEach((segment) => {
-    const row = createElement("div", "transport-segment");
-    if (segment.traveler) row.append(createElement("p", "transport-traveler", segment.traveler));
-    const times = createElement("p", "transport-times");
-    times.append(createElement("span", "transport-time", segment.departure || "—"));
-    times.append(createElement("span", "transport-arrow", "→"));
-    times.append(createElement("span", "transport-time", segment.arrival || "—"));
-    row.append(times);
-    const terminalRoute = [segment.fromTerminal, segment.toTerminal].filter(Boolean).join(" → ");
-    const detail = transport.mode === "flight" && terminalRoute ? terminalRoute : segment.detail;
-    if (detail) row.append(createElement("p", "transport-detail", detail));
-    panel.append(row);
-  });
-  if (transport.mode === "flight") {
-    panel.append(createElement("p", "terminal-caution", transport.terminalNote || "航站楼可能临时调整，出发前以登机牌和机场屏幕为准。"));
+function transportDateText(dateString) {
+  if (!dateString) return "";
+  const date = new Date(`${dateString}T12:00:00`);
+  const weekday = "日一二三四五六"[date.getDay()];
+  return `${date.getMonth() + 1}月${date.getDate()}日（${weekday}）`;
+}
+
+function cleanTransportService(transport) {
+  const raw = String(transport.service || transport.title || "交通").trim();
+  return raw.split(/[:：]/)[0].trim() || raw;
+}
+
+function transportRouteSource(transport) {
+  const route = String(transport.route || "").trim();
+  if (route) return route;
+  const raw = String(transport.service || transport.title || "");
+  const afterColon = raw.split(/[:：]/).slice(1).join("：").trim();
+  return afterColon;
+}
+
+function transportEndpoints(transport) {
+  if (transport.from || transport.to) return [transport.from || "", transport.to || ""];
+  const route = transportRouteSource(transport);
+  const parts = route.split(/\s*(?:→|->|—|－|-->)\s*/).filter(Boolean);
+  if (parts.length >= 2) return [parts[0], parts.slice(1).join(" → ")];
+  return [route, ""];
+}
+
+function transportIconMarkup(mode) {
+  if (mode === "drive") {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l1.6-4.2A2 2 0 0 1 8.5 6.5h7a2 2 0 0 1 1.9 1.3L19 12"/><path d="M4.5 12.5h15v4.2h-15z"/><circle cx="7.5" cy="17" r="1.2"/><circle cx="16.5" cy="17" r="1.2"/></svg>';
   }
+  if (mode === "other") {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13V2l8 4-8 4"/><path d="M20.6 10.2A9 9 0 1 1 8 4.9"/><path d="M8.4 10a5 5 0 1 0 7.2 3.6"/></svg>';
+  }
+  const icons = { flight: "✈︎", train: "🚆", bus: "🚌", boat: "⛴" };
+  return icons[mode] || "→";
+}
+
+function createTransportEndpoint(value, className = "") {
+  const endpoint = createElement("span", `transport-endpoint${className ? ` ${className}` : ""}`);
+  endpoint.textContent = value || "";
+  return endpoint;
+}
+
+function renderTransportCard(transport, dateString = "") {
+  const panel = createElement("section", `transport-ticket transport-ticket--${transport.mode}`);
+  const icon = createElement("span", "transport-icon");
+  icon.innerHTML = transportIconMarkup(transport.mode);
+  panel.append(icon);
+  const content = createElement("div", "transport-ticket__content");
+  const segment = Array.isArray(transport.segments) && transport.segments.length ? transport.segments[0] : {};
+  const [from, to] = transportEndpoints(transport);
+  const hasTime = Boolean(segment.departure || segment.arrival);
+  if (hasTime && dateString) {
+    const dates = createElement("div", "transport-ticket-row transport-ticket-row--date");
+    dates.append(createElement("span", "transport-date", transportDateText(dateString)));
+    dates.append(createElement("span", "transport-date transport-date--to", transportDateText(dateString)));
+    content.append(dates);
+  }
+  if (hasTime) {
+    const times = createElement("div", "transport-ticket-row transport-ticket-row--time");
+    if (segment.departure) times.append(createElement("span", "transport-time", segment.departure));
+    if (segment.departure && segment.arrival) times.append(createElement("span", "transport-route-dash", ""));
+    if (segment.arrival) times.append(createElement("span", "transport-time transport-time--to", segment.arrival));
+    content.append(times);
+  }
+  const route = createElement("div", `transport-ticket-row transport-ticket-row--place${hasTime ? "" : " transport-ticket-row--place-only"}`);
+  if (from) route.append(createTransportEndpoint(from));
+  if (from && to && !hasTime) route.append(createElement("span", "transport-route-dash", ""));
+  if (to) route.append(createTransportEndpoint(to, "transport-endpoint--to"));
+  content.append(route);
+  const service = cleanTransportService(transport);
+  if (service) content.append(createElement("p", "transport-service", service));
+  const detail = transport.mode === "flight" ? "" : segment.detail;
+  if (detail) content.append(createElement("p", "transport-detail", detail));
+  if (transport.mode === "flight") {
+    content.append(createElement("p", "terminal-caution", transport.terminalNote || "航站楼可能临时调整，出发前以登机牌和机场屏幕为准。"));
+  }
+  panel.append(content);
   return panel;
 }
 
@@ -2481,7 +2585,7 @@ function renderEvent(event, executionState = null) {
       const locations = createElement("div", "note-card__locations");
       event.mapTargets.forEach((target) => {
         const location = createElement("div", "location-row");
-        location.append(createElement("p", "location-name", target.label));
+        location.append(createElement("p", "location-name", target.label || target.query || target.destination || "导航目的地"));
         location.append(createMapActions(target));
         locations.append(location);
       });
@@ -2501,9 +2605,9 @@ function renderEvent(event, executionState = null) {
   if (executionClass === "ongoing") header.append(createElement("span", "execution-badge execution-badge--ongoing", "进行中"));
   header.append(renderTags(event));
   card.append(header);
-  card.append(createElement("h3", "event-title", event.what || "未命名事项"));
+  if (!event.transportCard) card.append(createElement("h3", "event-title", event.what || "未命名事项"));
 
-  if (event.transportCard) card.append(renderTransportCard(event.transportCard));
+  if (event.transportCard) card.append(renderTransportCard(event.transportCard, event.date));
 
   if (event.address) {
     const address = createElement("div", "event-detail event-detail--address");
@@ -2523,7 +2627,7 @@ function renderEvent(event, executionState = null) {
     locations.append(createElement("p", "detail-label", "地点导航"));
     event.mapTargets.forEach((target) => {
       const location = createElement("div", "location-row");
-      location.append(createElement("p", "location-name", target.label));
+      location.append(createElement("p", "location-name", target.label || target.query || target.destination || "导航目的地"));
       location.append(createMapActions(target));
       locations.append(location);
     });

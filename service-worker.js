@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "travel-plan-starter-v8";
+const CACHE_NAME = "travel-plan-starter-v22";
 const APP_SHELL = [
   "./",
   "./index.html",
