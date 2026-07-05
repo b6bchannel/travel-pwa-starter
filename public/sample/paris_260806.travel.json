@@ -1,0 +1,1318 @@
+{
+  "kind": "travel-plan-package",
+  "version": 1,
+  "tripId": "sample-trip",
+  "fileName": "paris_260806.travel.json",
+  "tripMeta": {
+    "id": "sample-trip",
+    "title": "France 10-Day Demo",
+    "dateStart": "2026-08-06",
+    "dateEnd": "2026-08-15",
+    "status": "demo",
+    "lastUpdated": "2026-07-03",
+    "mapProvider": "google"
+  },
+  "trip": {
+    "metadata": {
+      "schemaVersion": 1,
+      "tripId": "sample-trip",
+      "tripYear": 2026,
+      "dateStart": "2026-08-06",
+      "dateEnd": "2026-08-15",
+      "dayCount": 10,
+      "recordCount": 30,
+      "sourceName": "france-10-day-demo-itinerary.md",
+      "generatedAt": "2026-07-03T00:00:00+08:00",
+      "notes": "完全虚构的 Starter Kit 演示数据；酒店、航班、火车、地址和订单号均不可用于实际出行。",
+      "mapProvider": "google"
+    },
+    "days": [
+      {
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "theme": "",
+        "route": "抵达巴黎",
+        "eventIds": [
+          "demo-20260806-01",
+          "demo-20260806-02",
+          "demo-20260806-03"
+        ],
+        "brief": {
+          "hotelAtStart": null,
+          "hotelChanges": [
+            {
+              "eventId": "demo-20260806-02",
+              "name": "Hôtel Lumière Demo Paris",
+              "address": "12 Rue Exemple, 75009 Paris"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "keyTransportEventIds": [
+            "demo-20260806-01"
+          ],
+          "importantEventIds": [
+            "demo-20260806-01"
+          ]
+        },
+        "weatherLocation": {
+          "name": "巴黎",
+          "latitude": 48.8566,
+          "longitude": 2.3522
+        }
+      },
+      {
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "theme": "",
+        "route": "巴黎",
+        "eventIds": [
+          "demo-20260807-01",
+          "demo-20260807-02",
+          "demo-20260807-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": [
+            "demo-20260807-01"
+          ]
+        },
+        "weatherLocation": {
+          "name": "巴黎",
+          "latitude": 48.8566,
+          "longitude": 2.3522
+        }
+      },
+      {
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "theme": "",
+        "route": "巴黎",
+        "eventIds": [
+          "demo-20260808-01",
+          "demo-20260808-02",
+          "demo-20260808-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": [
+            "demo-20260808-02"
+          ]
+        },
+        "weatherLocation": {
+          "name": "巴黎",
+          "latitude": 48.8566,
+          "longitude": 2.3522
+        }
+      },
+      {
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "theme": "",
+        "route": "巴黎",
+        "eventIds": [
+          "demo-20260809-01",
+          "demo-20260809-02",
+          "demo-20260809-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": [
+            "demo-20260809-03"
+          ]
+        },
+        "weatherLocation": {
+          "name": "巴黎",
+          "latitude": 48.8566,
+          "longitude": 2.3522
+        }
+      },
+      {
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "theme": "",
+        "route": "巴黎 → 里昂",
+        "eventIds": [
+          "demo-20260810-01",
+          "demo-20260810-02",
+          "demo-20260810-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Lumière Demo Paris",
+            "address": "12 Rue Exemple, 75009 Paris"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "demo-20260810-02",
+              "name": "Maison Rhône Demo Lyon",
+              "address": "8 Rue Fictive, 69002 Lyon"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "Maison Rhône Demo Lyon",
+            "address": "8 Rue Fictive, 69002 Lyon"
+          },
+          "keyTransportEventIds": [
+            "demo-20260810-01"
+          ],
+          "importantEventIds": [
+            "demo-20260810-01"
+          ]
+        },
+        "weatherLocation": {
+          "name": "里昂",
+          "latitude": 45.764,
+          "longitude": 4.8357
+        }
+      },
+      {
+        "date": "2026-08-11",
+        "dateOriginal": "2026-08-11",
+        "theme": "",
+        "route": "里昂",
+        "eventIds": [
+          "demo-20260811-01",
+          "demo-20260811-02",
+          "demo-20260811-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Maison Rhône Demo Lyon",
+            "address": "8 Rue Fictive, 69002 Lyon"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Maison Rhône Demo Lyon",
+            "address": "8 Rue Fictive, 69002 Lyon"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": []
+        },
+        "weatherLocation": {
+          "name": "里昂",
+          "latitude": 45.764,
+          "longitude": 4.8357
+        }
+      },
+      {
+        "date": "2026-08-12",
+        "dateOriginal": "2026-08-12",
+        "theme": "",
+        "route": "里昂 → 阿维尼翁",
+        "eventIds": [
+          "demo-20260812-01",
+          "demo-20260812-02",
+          "demo-20260812-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Maison Rhône Demo Lyon",
+            "address": "8 Rue Fictive, 69002 Lyon"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "demo-20260812-02",
+              "name": "Hôtel Remparts Demo Avignon",
+              "address": "4 Place Imaginaire, 84000 Avignon"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Remparts Demo Avignon",
+            "address": "4 Place Imaginaire, 84000 Avignon"
+          },
+          "keyTransportEventIds": [
+            "demo-20260812-01"
+          ],
+          "importantEventIds": [
+            "demo-20260812-01"
+          ]
+        },
+        "weatherLocation": {
+          "name": "阿维尼翁",
+          "latitude": 43.9493,
+          "longitude": 4.8055
+        }
+      },
+      {
+        "date": "2026-08-13",
+        "dateOriginal": "2026-08-13",
+        "theme": "",
+        "route": "阿维尼翁",
+        "eventIds": [
+          "demo-20260813-01",
+          "demo-20260813-02",
+          "demo-20260813-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Remparts Demo Avignon",
+            "address": "4 Place Imaginaire, 84000 Avignon"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Hôtel Remparts Demo Avignon",
+            "address": "4 Place Imaginaire, 84000 Avignon"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": [
+            "demo-20260813-03"
+          ]
+        },
+        "weatherLocation": {
+          "name": "阿维尼翁",
+          "latitude": 43.9493,
+          "longitude": 4.8055
+        }
+      },
+      {
+        "date": "2026-08-14",
+        "dateOriginal": "2026-08-14",
+        "theme": "",
+        "route": "阿维尼翁 → 尼斯",
+        "eventIds": [
+          "demo-20260814-01",
+          "demo-20260814-02",
+          "demo-20260814-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Hôtel Remparts Demo Avignon",
+            "address": "4 Place Imaginaire, 84000 Avignon"
+          },
+          "hotelChanges": [
+            {
+              "eventId": "demo-20260814-02",
+              "name": "Villa Azur Demo Nice",
+              "address": "6 Avenue Exemple, 06000 Nice"
+            }
+          ],
+          "hotelAtEndAssumed": {
+            "name": "Villa Azur Demo Nice",
+            "address": "6 Avenue Exemple, 06000 Nice"
+          },
+          "keyTransportEventIds": [
+            "demo-20260814-01"
+          ],
+          "importantEventIds": [
+            "demo-20260814-01"
+          ]
+        },
+        "weatherLocation": {
+          "name": "尼斯",
+          "latitude": 43.7102,
+          "longitude": 7.262
+        }
+      },
+      {
+        "date": "2026-08-15",
+        "dateOriginal": "2026-08-15",
+        "theme": "",
+        "route": "尼斯",
+        "eventIds": [
+          "demo-20260815-01",
+          "demo-20260815-02",
+          "demo-20260815-03"
+        ],
+        "brief": {
+          "hotelAtStart": {
+            "name": "Villa Azur Demo Nice",
+            "address": "6 Avenue Exemple, 06000 Nice"
+          },
+          "hotelChanges": [],
+          "hotelAtEndAssumed": {
+            "name": "Villa Azur Demo Nice",
+            "address": "6 Avenue Exemple, 06000 Nice"
+          },
+          "keyTransportEventIds": [],
+          "importantEventIds": [
+            "demo-20260815-03"
+          ]
+        },
+        "weatherLocation": {
+          "name": "尼斯",
+          "latitude": 43.7102,
+          "longitude": 7.262
+        }
+      }
+    ],
+    "events": [
+      {
+        "id": "demo-20260806-01",
+        "source": "sample-trip",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "timeText": "10:20-16:35",
+        "timeStart": "10:20",
+        "timeEnd": "16:35",
+        "what": "乘坐示例航班抵达巴黎",
+        "place": "巴黎戴高乐机场",
+        "address": "",
+        "note": "DEMO 航班，仅用于展示交通卡片。",
+        "briefNote": "DEMO 航班，仅用于展示交通卡片。",
+        "category": "transport",
+        "tags": [
+          "transport",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": {
+          "kind": "flight",
+          "title": "Demo City → Paris",
+          "service": "DEMO 101",
+          "note": "示例航班，不可用于实际出行。",
+          "segments": [
+            {
+              "service": "DEMO 101",
+              "departureTime": "10:20",
+              "arrivalTime": "16:35",
+              "detail": "DCT T1 → CDG T2E"
+            }
+          ]
+        },
+        "mapTargets": [],
+        "rawText": "乘坐示例航班抵达巴黎"
+      },
+      {
+        "id": "demo-20260806-02",
+        "source": "sample-trip",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "timeText": "17:30-18:30",
+        "timeStart": "17:30",
+        "timeEnd": "18:30",
+        "what": "前往巴黎酒店并办理入住",
+        "place": "Hôtel Lumière Demo Paris",
+        "address": "12 Rue Exemple, 75009 Paris",
+        "note": "",
+        "briefNote": "",
+        "category": "hotel",
+        "tags": [
+          "hotel"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "Hôtel Lumière Demo Paris",
+            "query": "12 Rue Exemple, 75009 Paris",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "前往巴黎酒店并办理入住"
+      },
+      {
+        "id": "demo-20260806-03",
+        "source": "sample-trip",
+        "date": "2026-08-06",
+        "dateOriginal": "2026-08-06",
+        "timeText": "19:30-20:30",
+        "timeStart": "19:30",
+        "timeEnd": "20:30",
+        "what": "塞纳河边轻松散步",
+        "place": "塞纳河",
+        "address": "",
+        "note": "抵达日不要安排太满。",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "塞纳河",
+            "query": "Seine River Paris",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "塞纳河边轻松散步"
+      },
+      {
+        "id": "demo-20260807-01",
+        "source": "sample-trip",
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "timeText": "09:30-12:00",
+        "timeStart": "09:30",
+        "timeEnd": "12:00",
+        "what": "卢浮宫参观",
+        "place": "卢浮宫",
+        "address": "",
+        "note": "建议提前预约入场时间。",
+        "briefNote": "建议提前预约入场时间。",
+        "category": "reservation",
+        "tags": [
+          "reservation",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "卢浮宫",
+            "query": "Musée du Louvre",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "卢浮宫参观"
+      },
+      {
+        "id": "demo-20260807-02",
+        "source": "sample-trip",
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "timeText": "14:00-16:00",
+        "timeStart": "14:00",
+        "timeEnd": "16:00",
+        "what": "杜乐丽花园与协和广场散步",
+        "place": "杜乐丽花园",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "杜乐丽花园",
+            "query": "Jardin des Tuileries",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "杜乐丽花园与协和广场散步"
+      },
+      {
+        "id": "demo-20260807-03",
+        "source": "sample-trip",
+        "date": "2026-08-07",
+        "dateOriginal": "2026-08-07",
+        "timeText": "18:30-20:00",
+        "timeStart": "18:30",
+        "timeEnd": "20:00",
+        "what": "玛黑区晚餐",
+        "place": "玛黑区",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "dining",
+        "tags": [
+          "dining"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "玛黑区",
+            "query": "Le Marais Paris",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "玛黑区晚餐"
+      },
+      {
+        "id": "demo-20260808-01",
+        "source": "sample-trip",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "timeText": "09:30-11:00",
+        "timeStart": "09:30",
+        "timeEnd": "11:00",
+        "what": "埃菲尔铁塔外观与战神广场",
+        "place": "埃菲尔铁塔",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "埃菲尔铁塔",
+            "query": "Tour Eiffel",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "埃菲尔铁塔外观与战神广场"
+      },
+      {
+        "id": "demo-20260808-02",
+        "source": "sample-trip",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "timeText": "13:30-15:30",
+        "timeStart": "13:30",
+        "timeEnd": "15:30",
+        "what": "奥赛博物馆",
+        "place": "奥赛博物馆",
+        "address": "",
+        "note": "如想看印象派重点展厅，建议提前购票。",
+        "briefNote": "如想看印象派重点展厅，建议提前购票。",
+        "category": "reservation",
+        "tags": [
+          "reservation",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "奥赛博物馆",
+            "query": "Musée d'Orsay",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "奥赛博物馆"
+      },
+      {
+        "id": "demo-20260808-03",
+        "source": "sample-trip",
+        "date": "2026-08-08",
+        "dateOriginal": "2026-08-08",
+        "timeText": "17:00-18:00",
+        "timeStart": "17:00",
+        "timeEnd": "18:00",
+        "what": "拉丁区咖啡休息",
+        "place": "拉丁区",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "dining",
+        "tags": [
+          "dining"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "拉丁区",
+            "query": "Latin Quarter Paris",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "拉丁区咖啡休息"
+      },
+      {
+        "id": "demo-20260809-01",
+        "source": "sample-trip",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "timeText": "10:00-12:00",
+        "timeStart": "10:00",
+        "timeEnd": "12:00",
+        "what": "蒙马特高地散步",
+        "place": "蒙马特",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "蒙马特",
+            "query": "Montmartre Paris",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "蒙马特高地散步"
+      },
+      {
+        "id": "demo-20260809-02",
+        "source": "sample-trip",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "timeText": "14:00-16:30",
+        "timeStart": "14:00",
+        "timeEnd": "16:30",
+        "what": "巴黎自由购物或咖啡时间",
+        "place": "巴黎市中心",
+        "address": "",
+        "note": "可根据天气调整。",
+        "briefNote": "",
+        "category": "alternative",
+        "tags": [
+          "alternative"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "巴黎自由购物或咖啡时间"
+      },
+      {
+        "id": "demo-20260809-03",
+        "source": "sample-trip",
+        "date": "2026-08-09",
+        "dateOriginal": "2026-08-09",
+        "timeText": "20:00-20:30",
+        "timeStart": "20:00",
+        "timeEnd": "20:30",
+        "what": "整理行李，准备明早火车",
+        "place": "",
+        "address": "",
+        "note": "确认车站、车票二维码和酒店退房时间。",
+        "briefNote": "确认车站、车票二维码和酒店退房时间。",
+        "category": "attention",
+        "tags": [
+          "attention",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "整理行李，准备明早火车"
+      },
+      {
+        "id": "demo-20260810-01",
+        "source": "sample-trip",
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "timeText": "09:10-11:05",
+        "timeStart": "09:10",
+        "timeEnd": "11:05",
+        "what": "乘坐示例高速列车前往里昂",
+        "place": "巴黎里昂车站",
+        "address": "",
+        "note": "DEMO 车次，仅用于展示交通卡片。",
+        "briefNote": "DEMO 车次，仅用于展示交通卡片。",
+        "category": "transport",
+        "tags": [
+          "transport",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": {
+          "kind": "train",
+          "title": "巴黎 → 里昂",
+          "service": "DEMO TGV 6201",
+          "note": "示例班次，不可用于实际出行。",
+          "segments": [
+            {
+              "service": "DEMO TGV 6201",
+              "departureTime": "09:10",
+              "arrivalTime": "11:05",
+              "detail": "Paris Gare de Lyon → Lyon Part-Dieu"
+            }
+          ]
+        },
+        "mapTargets": [
+          {
+            "label": "巴黎里昂车站",
+            "query": "Paris Gare de Lyon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "乘坐示例高速列车前往里昂"
+      },
+      {
+        "id": "demo-20260810-02",
+        "source": "sample-trip",
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "timeText": "12:00-13:00",
+        "timeStart": "12:00",
+        "timeEnd": "13:00",
+        "what": "里昂酒店寄存行李或入住",
+        "place": "Maison Rhône Demo Lyon",
+        "address": "8 Rue Fictive, 69002 Lyon",
+        "note": "",
+        "briefNote": "",
+        "category": "hotel",
+        "tags": [
+          "hotel"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "Maison Rhône Demo Lyon",
+            "query": "8 Rue Fictive, 69002 Lyon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "里昂酒店寄存行李或入住"
+      },
+      {
+        "id": "demo-20260810-03",
+        "source": "sample-trip",
+        "date": "2026-08-10",
+        "dateOriginal": "2026-08-10",
+        "timeText": "15:00-17:00",
+        "timeStart": "15:00",
+        "timeEnd": "17:00",
+        "what": "老里昂散步",
+        "place": "老里昂",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "老里昂",
+            "query": "Vieux Lyon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "老里昂散步"
+      },
+      {
+        "id": "demo-20260811-01",
+        "source": "sample-trip",
+        "date": "2026-08-11",
+        "dateOriginal": "2026-08-11",
+        "timeText": "09:30-11:00",
+        "timeStart": "09:30",
+        "timeEnd": "11:00",
+        "what": "富维耶圣母院与城市视角",
+        "place": "富维耶圣母院",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "富维耶圣母院",
+            "query": "Basilique Notre-Dame de Fourvière",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "富维耶圣母院与城市视角"
+      },
+      {
+        "id": "demo-20260811-02",
+        "source": "sample-trip",
+        "date": "2026-08-11",
+        "dateOriginal": "2026-08-11",
+        "timeText": "12:30-14:00",
+        "timeStart": "12:30",
+        "timeEnd": "14:00",
+        "what": "里昂小餐馆午餐",
+        "place": "里昂老城",
+        "address": "",
+        "note": "可体验 bouchon 风格餐厅。",
+        "briefNote": "",
+        "category": "dining",
+        "tags": [
+          "dining"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "里昂小餐馆午餐"
+      },
+      {
+        "id": "demo-20260811-03",
+        "source": "sample-trip",
+        "date": "2026-08-11",
+        "dateOriginal": "2026-08-11",
+        "timeText": "16:00-17:30",
+        "timeStart": "16:00",
+        "timeEnd": "17:30",
+        "what": "罗讷河边散步",
+        "place": "罗讷河",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "罗讷河",
+            "query": "Rhône River Lyon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "罗讷河边散步"
+      },
+      {
+        "id": "demo-20260812-01",
+        "source": "sample-trip",
+        "date": "2026-08-12",
+        "dateOriginal": "2026-08-12",
+        "timeText": "10:20-11:25",
+        "timeStart": "10:20",
+        "timeEnd": "11:25",
+        "what": "乘坐示例列车前往阿维尼翁",
+        "place": "里昂 Part-Dieu 车站",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "transport",
+        "tags": [
+          "transport",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": {
+          "kind": "train",
+          "title": "里昂 → 阿维尼翁",
+          "service": "DEMO TER 7305",
+          "note": "示例班次，不可用于实际出行。",
+          "segments": [
+            {
+              "service": "DEMO TER 7305",
+              "departureTime": "10:20",
+              "arrivalTime": "11:25",
+              "detail": "Lyon Part-Dieu → Avignon Centre"
+            }
+          ]
+        },
+        "mapTargets": [
+          {
+            "label": "里昂 Part-Dieu 车站",
+            "query": "Lyon Part-Dieu",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "乘坐示例列车前往阿维尼翁"
+      },
+      {
+        "id": "demo-20260812-02",
+        "source": "sample-trip",
+        "date": "2026-08-12",
+        "dateOriginal": "2026-08-12",
+        "timeText": "12:00-13:00",
+        "timeStart": "12:00",
+        "timeEnd": "13:00",
+        "what": "阿维尼翁酒店入住",
+        "place": "Hôtel Remparts Demo Avignon",
+        "address": "4 Place Imaginaire, 84000 Avignon",
+        "note": "",
+        "briefNote": "",
+        "category": "hotel",
+        "tags": [
+          "hotel"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "Hôtel Remparts Demo Avignon",
+            "query": "4 Place Imaginaire, 84000 Avignon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "阿维尼翁酒店入住"
+      },
+      {
+        "id": "demo-20260812-03",
+        "source": "sample-trip",
+        "date": "2026-08-12",
+        "dateOriginal": "2026-08-12",
+        "timeText": "15:00-17:00",
+        "timeStart": "15:00",
+        "timeEnd": "17:00",
+        "what": "教皇宫外观与老城散步",
+        "place": "教皇宫",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "教皇宫",
+            "query": "Palais des Papes Avignon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "教皇宫外观与老城散步"
+      },
+      {
+        "id": "demo-20260813-01",
+        "source": "sample-trip",
+        "date": "2026-08-13",
+        "dateOriginal": "2026-08-13",
+        "timeText": "09:30-11:00",
+        "timeStart": "09:30",
+        "timeEnd": "11:00",
+        "what": "阿维尼翁断桥",
+        "place": "圣贝内泽桥",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "圣贝内泽桥",
+            "query": "Pont d'Avignon",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "阿维尼翁断桥"
+      },
+      {
+        "id": "demo-20260813-02",
+        "source": "sample-trip",
+        "date": "2026-08-13",
+        "dateOriginal": "2026-08-13",
+        "timeText": "14:00-17:00",
+        "timeStart": "14:00",
+        "timeEnd": "17:00",
+        "what": "普罗旺斯小镇半日自由活动",
+        "place": "普罗旺斯",
+        "address": "",
+        "note": "可根据天气改成室内咖啡和市场。",
+        "briefNote": "",
+        "category": "alternative",
+        "tags": [
+          "alternative"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "普罗旺斯小镇半日自由活动"
+      },
+      {
+        "id": "demo-20260813-03",
+        "source": "sample-trip",
+        "date": "2026-08-13",
+        "dateOriginal": "2026-08-13",
+        "timeText": "20:00-20:20",
+        "timeStart": "20:00",
+        "timeEnd": "20:20",
+        "what": "确认明天前往尼斯的车票",
+        "place": "",
+        "address": "",
+        "note": "检查出发车站和站台信息。",
+        "briefNote": "检查出发车站和站台信息。",
+        "category": "attention",
+        "tags": [
+          "attention",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "确认明天前往尼斯的车票"
+      },
+      {
+        "id": "demo-20260814-01",
+        "source": "sample-trip",
+        "date": "2026-08-14",
+        "dateOriginal": "2026-08-14",
+        "timeText": "09:40-12:55",
+        "timeStart": "09:40",
+        "timeEnd": "12:55",
+        "what": "乘坐示例列车前往尼斯",
+        "place": "阿维尼翁中央车站",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "transport",
+        "tags": [
+          "transport",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": {
+          "kind": "train",
+          "title": "阿维尼翁 → 尼斯",
+          "service": "DEMO TGV 6809",
+          "note": "示例班次，不可用于实际出行。",
+          "segments": [
+            {
+              "service": "DEMO TGV 6809",
+              "departureTime": "09:40",
+              "arrivalTime": "12:55",
+              "detail": "Avignon Centre → Nice-Ville"
+            }
+          ]
+        },
+        "mapTargets": [
+          {
+            "label": "阿维尼翁中央车站",
+            "query": "Avignon Centre",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "乘坐示例列车前往尼斯"
+      },
+      {
+        "id": "demo-20260814-02",
+        "source": "sample-trip",
+        "date": "2026-08-14",
+        "dateOriginal": "2026-08-14",
+        "timeText": "14:00-15:00",
+        "timeStart": "14:00",
+        "timeEnd": "15:00",
+        "what": "尼斯酒店入住",
+        "place": "Villa Azur Demo Nice",
+        "address": "6 Avenue Exemple, 06000 Nice",
+        "note": "",
+        "briefNote": "",
+        "category": "hotel",
+        "tags": [
+          "hotel"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "Villa Azur Demo Nice",
+            "query": "6 Avenue Exemple, 06000 Nice",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "尼斯酒店入住"
+      },
+      {
+        "id": "demo-20260814-03",
+        "source": "sample-trip",
+        "date": "2026-08-14",
+        "dateOriginal": "2026-08-14",
+        "timeText": "17:00-18:30",
+        "timeStart": "17:00",
+        "timeEnd": "18:30",
+        "what": "英国人漫步大道看海",
+        "place": "英国人漫步大道",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "英国人漫步大道",
+            "query": "Promenade des Anglais Nice",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "英国人漫步大道看海"
+      },
+      {
+        "id": "demo-20260815-01",
+        "source": "sample-trip",
+        "date": "2026-08-15",
+        "dateOriginal": "2026-08-15",
+        "timeText": "09:30-11:00",
+        "timeStart": "09:30",
+        "timeEnd": "11:00",
+        "what": "尼斯老城与集市",
+        "place": "尼斯老城",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "尼斯老城",
+            "query": "Vieux Nice",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "尼斯老城与集市"
+      },
+      {
+        "id": "demo-20260815-02",
+        "source": "sample-trip",
+        "date": "2026-08-15",
+        "dateOriginal": "2026-08-15",
+        "timeText": "13:30-15:30",
+        "timeStart": "13:30",
+        "timeEnd": "15:30",
+        "what": "城堡山观景",
+        "place": "城堡山",
+        "address": "",
+        "note": "",
+        "briefNote": "",
+        "category": "sightseeing",
+        "tags": [
+          "sightseeing"
+        ],
+        "important": false,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [
+          {
+            "label": "城堡山",
+            "query": "Colline du Château Nice",
+            "kind": "place",
+            "existingGoogleMapsUrl": ""
+          }
+        ],
+        "rawText": "城堡山观景"
+      },
+      {
+        "id": "demo-20260815-03",
+        "source": "sample-trip",
+        "date": "2026-08-15",
+        "dateOriginal": "2026-08-15",
+        "timeText": "18:00-19:00",
+        "timeStart": "18:00",
+        "timeEnd": "19:00",
+        "what": "整理照片与本机备份导出",
+        "place": "",
+        "address": "",
+        "note": "演示：旅行中建议每天导出一次本机备份。",
+        "briefNote": "演示：旅行中建议每天导出一次本机备份。",
+        "category": "attention",
+        "tags": [
+          "attention",
+          "important"
+        ],
+        "important": true,
+        "status": "active",
+        "transportCard": null,
+        "mapTargets": [],
+        "rawText": "整理照片与本机备份导出"
+      }
+    ]
+  },
+  "reviewNeeded": {
+    "tripId": "sample-trip",
+    "items": [
+      {
+        "id": "sample-task-001",
+        "title": "替换 sample-trip 为自己的真实行程 JSON",
+        "dueDate": "2026-07-20",
+        "dueLabel": "开始使用前",
+        "relatedDate": "2026-08-06",
+        "type": "setup",
+        "note": "这是演示待办，朋友部署后应删除或改成自己的事项。"
+      },
+      {
+        "id": "sample-task-002",
+        "title": "确认是否需要开启 Cloudflare Access",
+        "dueDate": "2026-07-21",
+        "dueLabel": "分享前",
+        "relatedDate": "2026-08-06",
+        "type": "privacy",
+        "note": "如果行程包含酒店、航班、订单号，建议开启访问保护。"
+      },
+      {
+        "id": "sample-task-003",
+        "title": "预约卢浮宫示例门票",
+        "dueDate": "2026-07-25",
+        "dueLabel": "出发前",
+        "relatedDate": "2026-08-07",
+        "relatedItemId": "demo-20260807-01",
+        "type": "booking",
+        "urlLabel": "示例官网",
+        "url": "https://www.louvre.fr/",
+        "note": "演示购票待办；不是实际订单。"
+      }
+    ]
+  }
+}
