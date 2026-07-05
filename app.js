@@ -2421,12 +2421,32 @@ function amapQueryForTarget(target) {
   return target.query || target.destination || target.label || "";
 }
 
+function isIOSDevice() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent);
+}
+
+function isAndroidDevice() {
+  return /Android|HarmonyOS|HUAWEI|HONOR/i.test(navigator.userAgent);
+}
+
+function coordinatePair(target) {
+  const lat = target.dlat ?? target.destinationLat ?? target.lat ?? target.latitude;
+  const lon = target.dlon ?? target.destinationLng ?? target.destinationLon ?? target.lng ?? target.lon ?? target.longitude;
+  if (lat === undefined || lat === null || lon === undefined || lon === null) return null;
+  return { lat, lon };
+}
+
 function mapUrls(target, provider = mapProviderForTarget(target)) {
   if (provider === "amap") {
     const query = amapQueryForTarget(target);
     const encoded = encodeURIComponent(query);
+    const coordinates = target.kind === "directions" ? coordinatePair(target) : null;
+    const androidScheme = coordinates
+      ? `androidamap://route/plan?sourceApplication=TravelPlan&dlat=${encodeURIComponent(coordinates.lat)}&dlon=${encodeURIComponent(coordinates.lon)}&dname=${encoded}&dev=0&t=0`
+      : `androidamap://poi?sourceApplication=TravelPlan&keywords=${encoded}&dev=0`;
     return {
       scheme: `iosamap://poi?sourceApplication=TravelPlan&name=${encoded}&dev=0`,
+      androidScheme,
       web: `https://uri.amap.com/search?keyword=${encoded}&src=TravelPlan&callnative=1`,
     };
   }
@@ -2464,8 +2484,34 @@ function createMapActions(target) {
   primary.rel = "noopener";
   primary.dataset.scheme = urls.scheme;
   primary.dataset.web = urls.web;
+  let openPending = false;
   primary.addEventListener("click", (event) => {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (provider === "amap" && isAndroidDevice() && urls.androidScheme) {
+      event.preventDefault();
+      if (openPending) return;
+      openPending = true;
+      let didHide = false;
+      const cleanup = () => {
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+        window.removeEventListener("pagehide", onPageHide);
+      };
+      const onVisibilityChange = () => {
+        if (document.visibilityState !== "visible") didHide = true;
+      };
+      const onPageHide = () => {
+        didHide = true;
+      };
+      document.addEventListener("visibilitychange", onVisibilityChange, { once: true });
+      window.addEventListener("pagehide", onPageHide, { once: true });
+      window.location.href = urls.androidScheme;
+      window.setTimeout(() => {
+        cleanup();
+        openPending = false;
+        if (!didHide && document.visibilityState === "visible") window.location.href = urls.web;
+      }, 1200);
+      return;
+    }
+    const isIOS = isIOSDevice();
     if (!isIOS || target.existingGoogleMapsUrl || (provider === "google" && target.kind === "directions")) return;
     event.preventDefault();
     window.location.href = urls.scheme;
