@@ -924,6 +924,100 @@ footer {
   white-space: pre-line;
   overflow-wrap: anywhere;
 }
+.route-overview__title {
+  margin: 0 0 .55rem;
+  color: var(--text);
+  font-size: .95rem;
+  font-weight: 850;
+}
+.route-sketch {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 11.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xs);
+  background: #f7f9f8;
+}
+.route-sketch__axes {
+  fill: none;
+  stroke: #dde4e1;
+  stroke-dasharray: 2 6;
+  stroke-width: 1;
+}
+.route-sketch__line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+.route-sketch__stop {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.route-sketch__stop--start { fill: #e8f2ee; }
+.route-sketch__stop--end { fill: var(--accent-soft); }
+.route-sketch__number,
+.route-sketch__north {
+  fill: var(--text);
+  font-size: 10px;
+  font-weight: 850;
+  text-anchor: middle;
+}
+.route-sketch__number { dominant-baseline: central; }
+.route-sketch__north {
+  fill: var(--muted);
+  font-size: 11px;
+  text-anchor: end;
+}
+.route-sketch__metric rect {
+  fill: var(--surface);
+  stroke: var(--line);
+}
+.route-sketch__metric text {
+  fill: var(--text);
+  font-size: 10px;
+  font-weight: 850;
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+.route-overview__summary {
+  margin: .65rem 0;
+  color: var(--text);
+  font-size: .88rem;
+  font-weight: 820;
+}
+.route-overview__stops {
+  display: grid;
+  gap: .65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.route-overview__stop {
+  min-width: 0;
+}
+.route-overview__stop-label {
+  display: block;
+  color: var(--text-soft);
+  font-size: .84rem;
+  font-weight: 760;
+  overflow-wrap: anywhere;
+}
+.route-overview__time {
+  margin-left: .4rem;
+  color: var(--muted);
+  font-size: .72rem;
+}
+.route-overview > .map-actions { margin-top: .8rem; }
+.route-overview__notes {
+  margin: .75rem 0 0;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.5;
+}
 .hotel-line + .hotel-line,
 .brief-list__item + .brief-list__item {
   margin-top: .9rem;

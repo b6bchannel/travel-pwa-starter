@@ -2201,6 +2201,180 @@ function appendQuickList(card, eventIds, mode) {
   return count;
 }
 
+function routeSketchPoints(stops, width = 320, height = 180, padding = 28) {
+  const validStops = stops
+    .map((stop, index) => ({ stop, index, lat: Number(stop.lat), lng: Number(stop.lng) }))
+    .filter(({ lat, lng }) => Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180);
+  if (validStops.length < 2) return [];
+
+  const meanLat = validStops.reduce((sum, point) => sum + point.lat, 0) / validStops.length;
+  const longitudeScale = Math.cos(meanLat * Math.PI / 180);
+  const projected = validStops.map((point) => ({ ...point, px: point.lng * longitudeScale, py: point.lat }));
+  const xs = projected.map((point) => point.px);
+  const ys = projected.map((point) => point.py);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const spanX = maxX - minX;
+  const spanY = maxY - minY;
+  const scale = Math.min(
+    spanX ? (width - padding * 2) / spanX : Infinity,
+    spanY ? (height - padding * 2) / spanY : Infinity
+  );
+  const safeScale = Number.isFinite(scale) ? scale : 1;
+  const usedWidth = spanX * safeScale;
+  const usedHeight = spanY * safeScale;
+  const offsetX = (width - usedWidth) / 2;
+  const offsetY = (height - usedHeight) / 2;
+
+  return projected.map((point, pointIndex, points) => {
+    let x = offsetX + (point.px - minX) * safeScale;
+    let y = height - offsetY - (point.py - minY) * safeScale;
+    const overlap = points.slice(0, pointIndex).filter((previous) => {
+      const previousX = offsetX + (previous.px - minX) * safeScale;
+      const previousY = height - offsetY - (previous.py - minY) * safeScale;
+      return Math.hypot(x - previousX, y - previousY) < 22;
+    }).length;
+    if (overlap) {
+      const angle = overlap * 2.4;
+      x = Math.max(14, Math.min(width - 14, x + Math.cos(angle) * 18));
+      y = Math.max(14, Math.min(height - 14, y + Math.sin(angle) * 18));
+    }
+    return { ...point, x, y };
+  });
+}
+
+function circledNumber(index) {
+  return "①②③④⑤⑥⑦⑧⑨⑩"[index] || `${index + 1}.`;
+}
+
+function createRouteSketch(stops, driveSummary = "") {
+  const points = routeSketchPoints(stops);
+  if (points.length < 2) return null;
+  const namespace = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(namespace, "svg");
+  svg.classList.add("route-sketch");
+  svg.setAttribute("viewBox", "0 0 320 180");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", "今日路线大致方位，北方朝上");
+
+  const axes = document.createElementNS(namespace, "path");
+  axes.setAttribute("d", "M160 18V162M18 90H302");
+  axes.setAttribute("class", "route-sketch__axes");
+  svg.append(axes);
+
+  const line = document.createElementNS(namespace, "polyline");
+  line.setAttribute("points", points.map(({ x, y }) => `${x},${y}`).join(" "));
+  line.setAttribute("class", "route-sketch__line");
+  svg.append(line);
+
+  if (driveSummary) {
+    const segments = points.slice(1).map((point, index) => ({
+      from: points[index],
+      to: point,
+      length: Math.hypot(point.x - points[index].x, point.y - points[index].y),
+    }));
+    const longest = segments.reduce((best, segment) => segment.length > best.length ? segment : best);
+    const width = Math.min(190, Math.max(104, driveSummary.length * 7 + 18));
+    const x = Math.max(width / 2 + 8, Math.min(320 - width / 2 - 8, (longest.from.x + longest.to.x) / 2));
+    const y = Math.max(22, Math.min(158, (longest.from.y + longest.to.y) / 2 - 14));
+    const label = document.createElementNS(namespace, "g");
+    label.setAttribute("class", "route-sketch__metric");
+    const background = document.createElementNS(namespace, "rect");
+    background.setAttribute("x", x - width / 2);
+    background.setAttribute("y", y - 11);
+    background.setAttribute("width", width);
+    background.setAttribute("height", "22");
+    background.setAttribute("rx", "11");
+    const text = document.createElementNS(namespace, "text");
+    text.setAttribute("x", x);
+    text.setAttribute("y", y);
+    text.textContent = driveSummary;
+    label.append(background, text);
+    svg.append(label);
+  }
+
+  points.forEach(({ x, y, index }, pointIndex) => {
+    const circle = document.createElementNS(namespace, "circle");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", "11");
+    const endpointClass = pointIndex === 0 ? " route-sketch__stop--start" : pointIndex === points.length - 1 ? " route-sketch__stop--end" : "";
+    circle.setAttribute("class", `route-sketch__stop${endpointClass}`);
+    const number = document.createElementNS(namespace, "text");
+    number.setAttribute("x", x);
+    number.setAttribute("y", y);
+    number.setAttribute("class", "route-sketch__number");
+    number.textContent = String(index + 1);
+    svg.append(circle, number);
+  });
+
+  const north = document.createElementNS(namespace, "text");
+  north.setAttribute("x", "302");
+  north.setAttribute("y", "20");
+  north.setAttribute("class", "route-sketch__north");
+  north.textContent = "N ↑";
+  svg.append(north);
+  return svg;
+}
+
+function drivingEventForDay(day) {
+  return keyTransportEventIdsForDay(day)
+    .map((id) => state.eventsById.get(id))
+    .find((event) => event?.transportCard?.mode === "drive");
+}
+
+function driveSummaryForDay(day) {
+  const detail = drivingEventForDay(day)?.transportCard?.segments?.[0]?.detail || "";
+  const distance = detail.match(/\b\d+(?:\.\d+)?\s*km\b/i)?.[0];
+  const duration = detail.match(/约\s*\d+小时(?:\d+分)?|约\s*\d+分/)?.[0];
+  return [distance, duration].filter(Boolean).join(" · ");
+}
+
+function routeOverviewTarget(day) {
+  if (!drivingEventForDay(day)) return null;
+  const stops = routeSketchPoints(day.routeOverview.stops).map(({ stop }) => stop);
+  if (stops.length < 2) return null;
+  const point = (stop) => `${stop.lat},${stop.lng}`;
+  return {
+    kind: "directions",
+    routeStops: stops,
+    origin: point(stops[0]),
+    destination: point(stops.at(-1)),
+    waypoints: stops.slice(1, -1).map(point),
+  };
+}
+
+function createRouteOverview(day) {
+  const overview = day.routeOverview;
+  if (!overview || !Array.isArray(overview.stops) || !overview.stops.length) return null;
+  const section = createElement("section", "route-overview");
+  section.append(createElement("h4", "route-overview__title", "今日路线方向"));
+  const sketch = createRouteSketch(overview.stops, driveSummaryForDay(day));
+  if (sketch) section.append(sketch);
+  if (overview.directionSummary) {
+    section.append(createElement("p", "route-overview__summary", overview.directionSummary));
+  }
+  const list = createElement("ol", "route-overview__stops");
+  overview.stops.forEach((stop, index) => {
+    const item = createElement("li", "route-overview__stop");
+    const label = createElement("span", "route-overview__stop-label", `${circledNumber(index)} ${stop.label || stop.query || "停靠点"}`);
+    if (stop.time) label.append(createElement("small", "route-overview__time", stop.time));
+    item.append(label);
+    list.append(item);
+  });
+  section.append(list);
+  const routeTarget = routeOverviewTarget(day);
+  if (routeTarget) section.append(createMapActions(routeTarget));
+  section.append(createElement(
+    "p",
+    "route-overview__notes",
+    overview.notes || "方向图仅表示大致方位，不代表实际道路形状，导航仍以地图 App 为准。"
+  ));
+  return section;
+}
+
 function renderTodayPanel(day, index, position, isLastPanel) {
   const panel = createElement("section", "today-panel");
   const header = createElement("header", "today-panel__header");
@@ -2228,8 +2402,13 @@ function renderTodayPanel(day, index, position, isLastPanel) {
   summary.append(weatherCard);
   updateWeatherCard(day, weatherBody);
 
+  const routeOverview = createRouteOverview(day);
   const keyTransportEventIds = keyTransportEventIdsForDay(day);
-  if (keyTransportEventIds.length) {
+  if (routeOverview) {
+    const transportCard = createQuickBriefCard("当日路线总览", "today-summary-card--transport");
+    transportCard.append(routeOverview);
+    summary.append(transportCard);
+  } else if (keyTransportEventIds.length) {
     const transportCard = createQuickBriefCard("关键交通", "today-summary-card--transport");
     if (appendQuickList(transportCard, keyTransportEventIds, "transport")) summary.append(transportCard);
   }
@@ -2381,6 +2560,20 @@ function renderBriefList(container, eventIds, emptyText, mode) {
   container.append(list);
 }
 
+function renderTransportBrief(day) {
+  const card = elements.transport.closest(".brief-card");
+  const heading = card?.querySelector("h3");
+  const overview = createRouteOverview(day);
+  if (overview) {
+    if (heading) heading.textContent = "当日路线总览";
+    if (card) card.hidden = false;
+    elements.transport.replaceChildren(overview);
+    return;
+  }
+  if (heading) heading.textContent = "关键交通";
+  renderBriefList(elements.transport, keyTransportEventIdsForDay(day), "当天没有关键公共交通", "transport");
+}
+
 function websiteLabel(event, index = 0) {
   if (Array.isArray(event.urlLabels) && event.urlLabels[index]) return event.urlLabels[index];
   if (event.urlLabel) return event.urlLabel;
@@ -2438,6 +2631,50 @@ function coordinatePair(target) {
 
 function mapUrls(target, provider = mapProviderForTarget(target)) {
   if (provider === "amap") {
+    if (target.kind === "directions" && target.routeStops?.length >= 2) {
+      const stops = target.routeStops.map((stop) => ({
+        ...coordinatePair(stop),
+        name: stop.label || stop.query || "途经点",
+      }));
+      const start = stops[0];
+      const destination = stops.at(-1);
+      const vias = stops.slice(1, -1);
+      const schemeParameters = new URLSearchParams({
+        sourceApplication: "TravelPlan",
+        slat: start.lat,
+        slon: start.lon,
+        sname: start.name,
+        dlat: destination.lat,
+        dlon: destination.lon,
+        dname: destination.name,
+        dev: "0",
+        t: "0",
+      });
+      if (vias.length) {
+        schemeParameters.set("vian", String(vias.length));
+        schemeParameters.set("vialons", vias.map((stop) => stop.lon).join("|"));
+        schemeParameters.set("vialats", vias.map((stop) => stop.lat).join("|"));
+        schemeParameters.set("vianames", vias.map((stop) => stop.name).join("|"));
+      }
+      const webParameters = new URLSearchParams({
+        from: `${start.lon},${start.lat},${start.name}`,
+        to: `${destination.lon},${destination.lat},${destination.name}`,
+        mode: "car",
+        policy: "0",
+        src: "TravelPlan",
+        callnative: "1",
+      });
+      if (vias.length) {
+        const via = vias[0];
+        webParameters.set("via", `${via.lon},${via.lat},${via.name}`);
+      }
+      const web = `https://uri.amap.com/navigation?${webParameters}`;
+      return {
+        scheme: web,
+        androidScheme: `amapuri://route/plan/?${schemeParameters}`,
+        web,
+      };
+    }
     const query = amapQueryForTarget(target);
     const encoded = encodeURIComponent(query);
     const coordinates = target.kind === "directions" ? coordinatePair(target) : null;
@@ -2523,7 +2760,8 @@ function createMapActions(target) {
   fallback.href = urls.web;
   fallback.target = "_blank";
   fallback.rel = "noopener";
-  actions.append(primary, fallback);
+  actions.append(primary);
+  if (!target.routeStops) actions.append(fallback);
   return actions;
 }
 
@@ -2712,7 +2950,7 @@ function renderDay() {
 
   updateWeatherCard(day, elements.weather);
   renderHotelBrief(day);
-  renderBriefList(elements.transport, keyTransportEventIdsForDay(day), "当天没有关键公共交通", "transport");
+  renderTransportBrief(day);
   renderBriefList(elements.important, day.brief.importantEventIds, "当天没有特别提醒", "important");
   elements.fullDayNote.replaceChildren(createDayNoteEditor(day.date));
   elements.timeline.replaceChildren(...events.map((event) => renderEvent(event, executionState)));
