@@ -1,5 +1,6 @@
 "use strict";
 
+const APP_VERSION = "20260724-weather-v1";
 const DB_NAME = "travel-plan-starter";
 const DB_VERSION = 7;
 const DEFAULT_TRIP_ID = "";
@@ -989,7 +990,7 @@ function weatherCategory(code) {
 }
 
 function weatherIllustrationPath(category, iconSet) {
-  return `./icons/weather/${iconSet}/${category}.svg`;
+  return `./icons/weather/${iconSet}/${category}.svg?v=${APP_VERSION}`;
 }
 
 function precipitationAmountLabel(value) {
@@ -3398,8 +3399,10 @@ boot().catch((error) => {
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js").catch((error) => {
-      console.error("离线功能注册失败", error);
-    });
+    navigator.serviceWorker.register("./service-worker.js", { updateViaCache: "none" })
+      .then((registration) => registration.update())
+      .catch((error) => {
+        console.error("离线功能注册失败", error);
+      });
   });
 }

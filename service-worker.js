@@ -1,22 +1,42 @@
 "use strict";
 
-const CACHE_NAME = "travel-plan-starter-v27";
+const APP_VERSION = "20260724-weather-v1";
+const CACHE_PREFIX = "travel-plan-starter-";
+const CACHE_NAME = `${CACHE_PREFIX}${APP_VERSION}`;
+const versioned = (path) => `${path}?v=${APP_VERSION}`;
+const WEATHER_VISUAL_TYPES = [
+  "sunny",
+  "partly-cloudy",
+  "cloudy",
+  "fog",
+  "rain",
+  "snow",
+  "thunderstorm",
+];
+const WEATHER_ICON_PATHS = ["animation", "static"].flatMap((iconSet) => (
+  WEATHER_VISUAL_TYPES.map((visualType) => (
+    versioned(`./icons/weather/${iconSet}/${visualType}.svg`)
+  ))
+));
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./manifest.json",
+  versioned("./styles.css"),
+  versioned("./app.js"),
+  versioned("./manifest.json"),
   "./icons/ico/icon-192.png",
   "./icons/ico/icon-512.png",
   "./icons/ico/apple-touch-icon.png",
   "./sample/paris_260806.travel.json",
+  ...WEATHER_ICON_PATHS,
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_SHELL))
+      .then((cache) => cache.addAll(
+        APP_SHELL.map((url) => new Request(url, { cache: "reload" }))
+      ))
       .then(() => self.skipWaiting())
   );
 });
@@ -25,11 +45,38 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
       .then((names) => Promise.all(
-        names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
+        names
+          .filter((name) => name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
       ))
-      .then(() => self.clients.claim())
+      .then(async () => {
+        await self.clients.claim();
+        const windows = await self.clients.matchAll({
+          type: "window",
+          includeUncontrolled: true,
+        });
+        await Promise.all(windows.map((client) => (
+          client.navigate(client.url).catch(() => null)
+        )));
+      })
   );
 });
+
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request, { cache: "no-store" });
+    if (response && response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    if (request.mode === "navigate") return caches.match("./index.html");
+    throw error;
+  }
+}
 
 self.addEventListener("fetch", (event) => {
   const request = event.request;
@@ -38,20 +85,5 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    fetch(request)
-      .then((response) => {
-        if (response && response.ok) {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-        }
-        return response;
-      })
-      .catch(async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
-        if (request.mode === "navigate") return caches.match("./index.html");
-        throw new Error(`Offline cache miss: ${url.pathname}`);
-      })
-  );
+  event.respondWith(networkFirst(request));
 });
