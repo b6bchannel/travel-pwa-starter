@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v4";
+const APP_VERSION = "20260724-weather-v5";
 const DB_NAME = "travel-plan-starter";
 const DB_VERSION = 7;
 const DEFAULT_TRIP_ID = "";

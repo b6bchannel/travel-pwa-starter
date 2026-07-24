@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v4";
+const APP_VERSION = "20260724-weather-v5";
 const CACHE_PREFIX = "travel-plan-starter-";
 const CACHE_NAME = `${CACHE_PREFIX}${APP_VERSION}`;
 const versioned = (path) => `${path}?v=${APP_VERSION}`;
@@ -24,9 +24,8 @@ const APP_SHELL = [
   versioned("./styles.css"),
   versioned("./app.js"),
   versioned("./manifest.json"),
-  versioned("./icons/ico/icon-192.png"),
-  versioned("./icons/ico/icon-512.png"),
-  versioned("./icons/ico/apple-touch-icon.png"),
+  versioned("./icons/ico/roadtrip-icon-192.png"),
+  versioned("./icons/ico/roadtrip-icon-512.png"),
   "./sample/paris_260806.travel.json",
   ...WEATHER_ICON_PATHS,
 ];
