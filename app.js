@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v1";
+const APP_VERSION = "20260724-weather-v2";
 const DB_NAME = "travel-plan-starter";
 const DB_VERSION = 7;
 const DEFAULT_TRIP_ID = "";
@@ -3398,8 +3398,18 @@ boot().catch((error) => {
 });
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
+  let serviceWorkerRefreshStarted = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (serviceWorkerRefreshStarted) return;
+    serviceWorkerRefreshStarted = true;
+    window.location.reload();
+  });
+
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js", { updateViaCache: "none" })
+    navigator.serviceWorker.register(
+      `./service-worker.js?v=${APP_VERSION}`,
+      { updateViaCache: "none" }
+    )
       .then((registration) => registration.update())
       .catch((error) => {
         console.error("离线功能注册失败", error);
