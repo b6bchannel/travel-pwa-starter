@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v3";
+const APP_VERSION = "20260724-weather-v4";
 const CACHE_PREFIX = "travel-plan-starter-";
 const CACHE_NAME = `${CACHE_PREFIX}${APP_VERSION}`;
 const versioned = (path) => `${path}?v=${APP_VERSION}`;

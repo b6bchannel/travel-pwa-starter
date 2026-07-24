@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v3";
+const APP_VERSION = "20260724-weather-v4";
 const DB_NAME = "travel-plan-starter";
 const DB_VERSION = 7;
 const DEFAULT_TRIP_ID = "";
@@ -1044,7 +1044,7 @@ function weatherDayOffset(dateString) {
 
 function isForecastDate(day) {
   const offset = weatherDayOffset(day.date);
-  return offset >= 0 && offset <= WEATHER_FORECAST_DAYS;
+  return offset >= 0 && offset < WEATHER_FORECAST_DAYS;
 }
 
 function hasWeatherCoordinates(location) {
