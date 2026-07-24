@@ -1,7 +1,7 @@
 "use strict";
 
-const APP_VERSION = "20260724-weather-v5";
-const CACHE_PREFIX = "travel-plan-starter-";
+const APP_VERSION = "20260724-weather-v6";
+const CACHE_PREFIX = "itinerary-viewer-cache-";
 const CACHE_NAME = `${CACHE_PREFIX}${APP_VERSION}`;
 const versioned = (path) => `${path}?v=${APP_VERSION}`;
 const WEATHER_VISUAL_TYPES = [
@@ -70,9 +70,10 @@ async function networkFirst(request) {
     }
     return response;
   } catch (error) {
-    const cached = await caches.match(request);
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request);
     if (cached) return cached;
-    if (request.mode === "navigate") return caches.match("./index.html");
+    if (request.mode === "navigate") return cache.match("./index.html");
     throw error;
   }
 }

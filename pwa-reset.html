@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>正在更新 Travel Plan</title>
+</head>
+<body>
+  <p id="status">正在清理这个行程查看器的旧离线缓存……</p>
+  <script>
+    (async () => {
+      const status = document.getElementById("status");
+      const appBase = new URL("./", window.location.href);
+
+      if ("serviceWorker" in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(
+          registrations
+            .filter((registration) => registration.scope === appBase.href)
+            .map((registration) => registration.unregister())
+        );
+      }
+
+      if ("caches" in window) {
+        const cacheNames = await caches.keys();
+        for (const cacheName of cacheNames) {
+          const cache = await caches.open(cacheName);
+          const requests = await cache.keys();
+          await Promise.all(
+            requests
+              .filter((request) => request.url.startsWith(appBase.href))
+              .map((request) => cache.delete(request))
+          );
+        }
+      }
+
+      status.textContent = "旧缓存已清理，正在打开最新版……";
+      window.location.replace(`./?pwa-reset=${Date.now()}`);
+    })().catch((error) => {
+      console.error(error);
+      document.getElementById("status").textContent =
+        "自动清理失败，请在浏览器的网站设置中清除 b6bchannel.github.io 的网站数据。";
+    });
+  </script>
+</body>
+</html>
