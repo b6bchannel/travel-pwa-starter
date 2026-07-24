@@ -1,267 +1,3 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#264653">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Travel Plan">
-  <title>Travel Plan</title>
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/ico/icon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./icons/ico/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header class="page-header">
-    <div class="page-header__inner">
-      <p class="eyebrow">Travel Plan</p>
-      <p id="trip-summary" class="trip-summary">正在读取行程……</p>
-      <p id="local-save-status" class="local-save-status">正在准备本地保存……</p>
-    </div>
-    <button id="trip-manager-trigger" class="trip-manager-trigger" type="button" hidden>
-      <span class="trip-manager-trigger__label">旅途</span>
-      <span id="trip-manager-title" class="trip-manager-trigger__title">尚未导入旅途</span>
-      <span id="trip-manager-meta" class="trip-manager-trigger__meta">导入旅行包后开始</span>
-      <span class="trip-manager-trigger__chevron" aria-hidden="true">⌄</span>
-    </button>
-  </header>
-
-  <main id="app" class="app-shell" hidden>
-    <nav class="view-switch" aria-label="选择查看方式">
-      <button id="show-today" class="view-switch__button" type="button" aria-pressed="true">今日 / 明日</button>
-      <button id="show-all" class="view-switch__button" type="button" aria-pressed="false">完整行程</button>
-    </nav>
-
-    <section id="today-view" class="today-view" aria-labelledby="today-view-title">
-      <div class="section-heading">
-        <p class="eyebrow">At a glance</p>
-        <h2 id="today-view-title">今日与明日</h2>
-      </div>
-      <div id="checklist-panel"></div>
-      <div id="today-panels" class="today-panels"></div>
-      <div id="backup-panel"></div>
-      <div id="date-visibility-panel"></div>
-    </section>
-
-    <section id="full-itinerary-view" hidden>
-      <nav class="date-navigation" aria-label="选择行程日期">
-        <button id="previous-day" class="nav-button" type="button">‹ 前一天</button>
-        <div id="day-tabs" class="day-tabs" aria-label="全部行程日期"></div>
-        <button id="next-day" class="nav-button" type="button">后一天 ›</button>
-      </nav>
-
-      <section class="day-heading" aria-labelledby="day-title">
-        <p id="day-date" class="day-date"></p>
-        <h2 id="day-title"></h2>
-      </section>
-
-      <section class="brief" aria-label="每日简报">
-        <div class="brief-grid">
-          <article class="brief-card brief-card--weather">
-            <h3>天气</h3>
-            <div id="brief-weather"></div>
-          </article>
-          <article class="brief-card brief-card--transport">
-            <h3>关键交通</h3>
-            <div id="brief-transport"></div>
-          </article>
-          <article class="brief-card brief-card--important">
-            <h3>重要提醒</h3>
-            <div id="brief-important"></div>
-          </article>
-          <article class="brief-card brief-card--hotel">
-            <h3>酒店</h3>
-            <div id="brief-hotel"></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="timeline-section" aria-labelledby="timeline-title">
-        <div class="section-heading section-heading--row">
-          <div>
-            <p class="eyebrow">Timeline</p>
-            <h2 id="timeline-title">当天行动</h2>
-          </div>
-          <div class="section-actions">
-            <p id="event-count" class="event-count"></p>
-            <button id="add-event" class="add-event-button" type="button">＋ 新增事项</button>
-          </div>
-        </div>
-        <div id="timeline" class="timeline"></div>
-        <div id="full-day-note"></div>
-      </section>
-    </section>
-  </main>
-
-  <section id="load-error" class="load-error" hidden>
-    <h2>暂时无法读取行程</h2>
-    <p>请从右上角菜单导入一个 .travel.json 旅行包。</p>
-  </section>
-
-  <dialog id="edit-dialog" class="edit-dialog">
-    <form id="edit-form" class="edit-form" method="dialog">
-      <div class="edit-form__heading">
-        <div>
-          <p class="eyebrow">Local edit</p>
-          <h2 id="edit-dialog-title">编辑事项</h2>
-        </div>
-        <button id="close-edit" class="dialog-close" type="button" aria-label="关闭">×</button>
-      </div>
-
-      <label class="form-field form-field--wide">
-        <span>日期</span>
-        <input id="edit-date" name="date" type="date" required>
-      </label>
-      <label class="form-field form-field--half form-field--time-start">
-        <span>开始时间</span>
-        <input id="edit-start-time" name="startTime" type="time">
-      </label>
-      <label class="form-field form-field--half form-field--time-end">
-        <span>结束时间</span>
-        <input id="edit-end-time" name="endTime" type="time">
-      </label>
-      <label class="form-field form-field--wide">
-        <span>做什么</span>
-        <input id="edit-title" name="title" type="text" required>
-      </label>
-      <fieldset id="edit-kind-field" class="transport-toggle form-field--wide" hidden>
-        <legend>是否记录交通信息</legend>
-        <label>
-          <input type="radio" name="kind" value="normal" checked>
-          <span>否</span>
-        </label>
-        <label>
-          <input type="radio" name="kind" value="transport">
-          <span>是</span>
-        </label>
-      </fieldset>
-      <section id="transport-fields" class="transport-edit form-field--wide" hidden>
-        <p class="transport-edit__title">交通信息</p>
-        <div class="transport-edit__grid">
-          <label class="form-field">
-            <span>交通方式</span>
-            <select id="transport-mode" name="transportMode">
-              <option value="flight">飞机</option>
-              <option value="train">火车</option>
-              <option value="bus">大巴</option>
-              <option value="boat">轮船</option>
-              <option value="drive">自驾</option>
-              <option value="other">其他</option>
-            </select>
-          </label>
-          <label class="form-field">
-            <span>路线标题</span>
-            <input id="transport-route" name="transportRoute" type="text" placeholder="例如 SHA T1 → AMS T1">
-          </label>
-          <label class="form-field">
-            <span>航次/车次号</span>
-            <input id="transport-service" name="transportService" type="text" placeholder="例如 LH5643">
-          </label>
-        </div>
-        <p class="transport-edit__hint">卡片标题使用“做什么”；卡片时间使用上面的开始/结束时间；补充说明使用下面的备注。</p>
-      </section>
-      <label class="form-field form-field--wide">
-        <span>地址</span>
-        <input id="edit-address" name="address" type="text">
-      </label>
-      <label class="form-field form-field--wide">
-        <span>新地图搜索词</span>
-        <input id="edit-map-query" name="mapQuery" type="text" placeholder="不填则保留原导航">
-      </label>
-      <label class="form-field form-field--wide">
-        <span>备注</span>
-        <textarea id="edit-notes" name="notes" rows="5"></textarea>
-      </label>
-      <label id="brief-summary-field" class="form-field form-field--wide" hidden>
-        <span>brief 显示内容</span>
-        <textarea id="edit-brief-summary" name="briefSummary" rows="3"></textarea>
-      </label>
-
-      <div class="edit-form__actions form-field--wide">
-        <button id="cancel-edit" class="secondary-button" type="button">不保存</button>
-        <button class="primary-button" type="submit">保存到本机</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog id="date-visibility-dialog" class="date-visibility-dialog">
-    <form id="date-visibility-form" class="date-visibility-form" method="dialog">
-      <div class="date-visibility-heading">
-        <div>
-          <p class="eyebrow">Local view</p>
-          <h2>管理显示日期</h2>
-        </div>
-        <button id="close-date-visibility" class="dialog-close" type="button" aria-label="关闭">×</button>
-      </div>
-      <p class="date-visibility-intro">取消勾选不想显示的日期。这里只影响这台设备，不会修改原始 trip.json。</p>
-      <div id="date-visibility-list" class="date-visibility-list"></div>
-      <div class="date-visibility-actions">
-        <button id="cancel-date-visibility" class="secondary-button" type="button">不保存</button>
-        <button class="primary-button" type="submit">保存显示日期</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog id="extra-date-dialog" class="date-visibility-dialog">
-    <form id="extra-date-form" class="date-visibility-form" method="dialog">
-      <div class="date-visibility-heading">
-        <div>
-          <p class="eyebrow">Local date</p>
-          <h2>新增日期</h2>
-        </div>
-        <button id="close-extra-date" class="dialog-close" type="button" aria-label="关闭">×</button>
-      </div>
-      <div class="extra-date-actions">
-        <button id="add-date-before" class="secondary-button" type="button">在最前加一天</button>
-        <button id="add-date-after" class="secondary-button" type="button">在最后加一天</button>
-      </div>
-      <p class="date-visibility-intro">新增日期仅保存在本机，如果加错日期可以用重置按钮恢复。</p>
-    </form>
-  </dialog>
-
-  <dialog id="day-title-dialog" class="date-visibility-dialog">
-    <form id="day-title-form" class="date-visibility-form" method="dialog">
-      <div class="date-visibility-heading">
-        <div>
-          <p class="eyebrow">Local title</p>
-          <h2>编辑标题</h2>
-        </div>
-        <button id="close-day-title" class="dialog-close" type="button" aria-label="关闭">×</button>
-      </div>
-      <label class="form-field">
-        <span>行程日标题</span>
-        <input id="day-title-input" name="dayTitle" type="text" required>
-      </label>
-      <div class="date-visibility-actions">
-        <button id="cancel-day-title" class="secondary-button" type="button">不保存</button>
-        <button class="primary-button" type="submit">保存</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog id="trip-manager-dialog" class="trip-manager-dialog">
-    <div class="trip-manager-sheet">
-      <div class="trip-manager-sheet__grab" aria-hidden="true"></div>
-      <header class="trip-manager-sheet__header">
-        <h2>我的旅途</h2>
-        <button id="close-trip-manager" class="dialog-close" type="button" aria-label="关闭">×</button>
-      </header>
-      <div id="trip-manager-content" class="trip-manager-content"></div>
-      <footer class="trip-manager-actions">
-        <button id="trip-manager-import" class="trip-manager-action" type="button">
-          <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg></span>
-          <span><strong>导入旅行包</strong><small>仅保存到这台设备</small></span>
-        </button>
-      </footer>
-    </div>
-  </dialog>
-
-  <input id="backup-file-input" type="file" accept="application/json,.json,.travel.json" hidden>
-  <input id="trip-import-input" type="file" accept="application/json,.json,.travel.json" hidden>
-
-  <script id="builtin-sample-trip" type="application/json">
 {
   "kind": "travel-plan-package",
   "version": 1,
@@ -273,7 +9,7 @@
     "dateStart": "2026-08-06",
     "dateEnd": "2026-08-15",
     "status": "demo",
-    "lastUpdated": "2026-07-03",
+    "lastUpdated": "2026-07-24",
     "mapProvider": "google"
   },
   "trip": {
@@ -322,9 +58,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "巴黎",
-          "latitude": 48.8566,
-          "longitude": 2.3522
+          "displayName": "巴黎",
+          "name": "Paris",
+          "countryCode": "FR",
+          "latitude": 48.857,
+          "longitude": 2.352,
+          "source": "city-center"
         }
       },
       {
@@ -332,6 +71,16 @@
         "dateOriginal": "2026-08-07",
         "theme": "",
         "route": "巴黎",
+        "routeOverview": {
+          "directionSummary": "先向西穿过杜乐丽花园，再向东前往玛黑区",
+          "travelMode": "walking",
+          "stops": [
+            { "label": "卢浮宫", "query": "Louvre Museum Paris", "lat": 48.8606, "lng": 2.3376, "kind": "sight", "time": "上午" },
+            { "label": "杜乐丽花园", "query": "Tuileries Garden Paris", "lat": 48.8638, "lng": 2.327, "kind": "sight" },
+            { "label": "协和广场", "query": "Place de la Concorde Paris", "lat": 48.8656, "lng": 2.3212, "kind": "stop" },
+            { "label": "玛黑区", "query": "Le Marais Paris", "lat": 48.8566, "lng": 2.3622, "kind": "meal", "time": "晚上" }
+          ]
+        },
         "eventIds": [
           "demo-20260807-01",
           "demo-20260807-02",
@@ -353,9 +102,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "巴黎",
-          "latitude": 48.8566,
-          "longitude": 2.3522
+          "displayName": "巴黎",
+          "name": "Paris",
+          "countryCode": "FR",
+          "latitude": 48.857,
+          "longitude": 2.352,
+          "source": "city-center"
         }
       },
       {
@@ -363,6 +115,15 @@
         "dateOriginal": "2026-08-08",
         "theme": "",
         "route": "巴黎",
+        "routeOverview": {
+          "directionSummary": "先向东北到奥赛，再向东南进入拉丁区",
+          "travelMode": "walking",
+          "stops": [
+            { "label": "埃菲尔铁塔", "query": "Eiffel Tower Paris", "lat": 48.8584, "lng": 2.2945, "kind": "sight", "time": "上午" },
+            { "label": "奥赛博物馆", "query": "Musée d'Orsay Paris", "lat": 48.86, "lng": 2.3266, "kind": "sight" },
+            { "label": "拉丁区", "query": "Latin Quarter Paris", "lat": 48.8462, "lng": 2.348, "kind": "meal", "time": "下午" }
+          ]
+        },
         "eventIds": [
           "demo-20260808-01",
           "demo-20260808-02",
@@ -384,9 +145,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "巴黎",
-          "latitude": 48.8566,
-          "longitude": 2.3522
+          "displayName": "巴黎",
+          "name": "Paris",
+          "countryCode": "FR",
+          "latitude": 48.857,
+          "longitude": 2.352,
+          "source": "city-center"
         }
       },
       {
@@ -394,6 +158,14 @@
         "dateOriginal": "2026-08-09",
         "theme": "",
         "route": "巴黎",
+        "routeOverview": {
+          "directionSummary": "从蒙马特向南进入巴黎市中心",
+          "travelMode": "walking",
+          "stops": [
+            { "label": "蒙马特高地", "query": "Montmartre Paris", "lat": 48.8867, "lng": 2.3431, "kind": "sight", "time": "上午" },
+            { "label": "巴黎歌剧院", "query": "Palais Garnier Paris", "lat": 48.8719, "lng": 2.3316, "kind": "stop", "time": "下午" }
+          ]
+        },
         "eventIds": [
           "demo-20260809-01",
           "demo-20260809-02",
@@ -415,9 +187,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "巴黎",
-          "latitude": 48.8566,
-          "longitude": 2.3522
+          "displayName": "巴黎",
+          "name": "Paris",
+          "countryCode": "FR",
+          "latitude": 48.857,
+          "longitude": 2.352,
+          "source": "city-center"
         }
       },
       {
@@ -454,9 +229,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "里昂",
+          "displayName": "里昂",
+          "name": "Lyon",
+          "countryCode": "FR",
           "latitude": 45.764,
-          "longitude": 4.8357
+          "longitude": 4.836,
+          "source": "city-center"
         }
       },
       {
@@ -483,9 +261,12 @@
           "importantEventIds": []
         },
         "weatherLocation": {
-          "name": "里昂",
+          "displayName": "里昂",
+          "name": "Lyon",
+          "countryCode": "FR",
           "latitude": 45.764,
-          "longitude": 4.8357
+          "longitude": 4.836,
+          "source": "city-center"
         }
       },
       {
@@ -522,9 +303,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "阿维尼翁",
-          "latitude": 43.9493,
-          "longitude": 4.8055
+          "displayName": "阿维尼翁",
+          "name": "Avignon",
+          "countryCode": "FR",
+          "latitude": 43.949,
+          "longitude": 4.806,
+          "source": "city-center"
         }
       },
       {
@@ -553,9 +337,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "阿维尼翁",
-          "latitude": 43.9493,
-          "longitude": 4.8055
+          "displayName": "阿维尼翁",
+          "name": "Avignon",
+          "countryCode": "FR",
+          "latitude": 43.949,
+          "longitude": 4.806,
+          "source": "city-center"
         }
       },
       {
@@ -592,9 +379,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "尼斯",
-          "latitude": 43.7102,
-          "longitude": 7.262
+          "displayName": "尼斯",
+          "name": "Nice",
+          "countryCode": "FR",
+          "latitude": 43.710,
+          "longitude": 7.262,
+          "source": "city-center"
         }
       },
       {
@@ -623,9 +413,12 @@
           ]
         },
         "weatherLocation": {
-          "name": "尼斯",
-          "latitude": 43.7102,
-          "longitude": 7.262
+          "displayName": "尼斯",
+          "name": "Nice",
+          "countryCode": "FR",
+          "latitude": 43.710,
+          "longitude": 7.262,
+          "source": "city-center"
         }
       }
     ],
@@ -651,16 +444,16 @@
         "important": true,
         "status": "active",
         "transportCard": {
-          "kind": "flight",
-          "title": "Demo City → Paris",
+          "mode": "flight",
+          "from": "DCT T1",
+          "to": "CDG T2E",
           "service": "DEMO 101",
-          "note": "示例航班，不可用于实际出行。",
+          "terminalNote": "示例航班，不可用于实际出行。",
           "segments": [
             {
-              "service": "DEMO 101",
-              "departureTime": "10:20",
-              "arrivalTime": "16:35",
-              "detail": "DCT T1 → CDG T2E"
+              "departure": "10:20",
+              "arrival": "16:35",
+              "detail": ""
             }
           ]
         },
@@ -1007,16 +800,15 @@
         "important": true,
         "status": "active",
         "transportCard": {
-          "kind": "train",
-          "title": "巴黎 → 里昂",
+          "mode": "train",
+          "from": "Paris Gare de Lyon",
+          "to": "Lyon Part-Dieu",
           "service": "DEMO TGV 6201",
-          "note": "示例班次，不可用于实际出行。",
           "segments": [
             {
-              "service": "DEMO TGV 6201",
-              "departureTime": "09:10",
-              "arrivalTime": "11:05",
-              "detail": "Paris Gare de Lyon → Lyon Part-Dieu"
+              "departure": "09:10",
+              "arrival": "11:05",
+              "detail": ""
             }
           ]
         },
@@ -1194,16 +986,15 @@
         "important": true,
         "status": "active",
         "transportCard": {
-          "kind": "train",
-          "title": "里昂 → 阿维尼翁",
+          "mode": "train",
+          "from": "Lyon Part-Dieu",
+          "to": "Avignon Centre",
           "service": "DEMO TER 7305",
-          "note": "示例班次，不可用于实际出行。",
           "segments": [
             {
-              "service": "DEMO TER 7305",
-              "departureTime": "10:20",
-              "arrivalTime": "11:25",
-              "detail": "Lyon Part-Dieu → Avignon Centre"
+              "departure": "10:20",
+              "arrival": "11:25",
+              "detail": ""
             }
           ]
         },
@@ -1375,16 +1166,15 @@
         "important": true,
         "status": "active",
         "transportCard": {
-          "kind": "train",
-          "title": "阿维尼翁 → 尼斯",
+          "mode": "train",
+          "from": "Avignon Centre",
+          "to": "Nice-Ville",
           "service": "DEMO TGV 6809",
-          "note": "示例班次，不可用于实际出行。",
           "segments": [
             {
-              "service": "DEMO TGV 6809",
-              "departureTime": "09:40",
-              "arrivalTime": "12:55",
-              "detail": "Avignon Centre → Nice-Ville"
+              "departure": "09:40",
+              "arrival": "12:55",
+              "detail": ""
             }
           ]
         },
@@ -1580,8 +1370,3 @@
     ]
   }
 }
-
-  </script>
-  <script src="app.js"></script>
-</body>
-</html>

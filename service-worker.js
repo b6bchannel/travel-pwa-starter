@@ -1,22 +1,15 @@
 "use strict";
 
-const CACHE_NAME = "travel-plan-starter-v22";
+const CACHE_NAME = "travel-plan-starter-v27";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.json",
-  "./icons/icon.png",
-  "./icons/icon-192.png",
-  "./icons/apple-touch-icon.png",
-  "./icons/apple-touch-icon-precomposed.png",
-  "./icons/apple-touch-icon-120x120.png",
-  "./icons/apple-touch-icon-152x152.png",
-  "./icons/apple-touch-icon-167x167.png",
-  "./icons/apple-touch-icon-180x180.png",
-  "./icons/apple-touch-icon-192x192.png",
-  "./icons/apple-touch-icon-512x512.png",
+  "./icons/ico/icon-192.png",
+  "./icons/ico/icon-512.png",
+  "./icons/ico/apple-touch-icon.png",
   "./sample/paris_260806.travel.json",
 ];
 

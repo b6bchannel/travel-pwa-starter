@@ -6,7 +6,6 @@ const DEFAULT_TRIP_ID = "";
 const NOTE_SAVE_DELAY = 500;
 const WEATHER_CACHE_PREFIX = "weather:";
 const WEATHER_FORECAST_DAYS = 16;
-const WEATHER_TREND_DAYS = 35;
 const WEATHER_HISTORY_YEARS = 10;
 const WEATHER_HISTORY_WINDOW_DAYS = 3;
 
@@ -944,40 +943,96 @@ function fullDate(dateString) {
 }
 
 function primaryCityForDay(day) {
-  return day.titleOverride || day.weatherLocation?.name || WEATHER_LOCATIONS_BY_DATE[day.date]?.name || day.route || "";
+  const fallbackLocation = WEATHER_LOCATIONS_BY_DATE[day.date];
+  return day.titleOverride
+    || day.weatherLocation?.displayName
+    || day.weatherLocation?.name
+    || fallbackLocation?.displayName
+    || fallbackLocation?.name
+    || day.route
+    || "";
 }
 
 function dayTitleText(day) {
   return day.titleOverride || day.route || day.theme || "当日行程";
 }
 
-function weatherCacheKey(kind, location, suffix = "") {
-  return `${WEATHER_CACHE_PREFIX}${kind}:${location.id || `${location.latitude},${location.longitude}`}:${suffix}`;
+function weatherLocationLabel(location) {
+  return String(location?.displayName || location?.name || "").trim();
+}
+
+function weatherCacheKey(stage, location, date) {
+  if (hasWeatherCoordinates(location)) {
+    const latitude = Number(location.latitude).toFixed(3);
+    const longitude = Number(location.longitude).toFixed(3);
+    return `${WEATHER_CACHE_PREFIX}${latitude}:${longitude}:${date}:${stage}`;
+  }
+  const countryCode = String(location?.countryCode || "").trim().toUpperCase();
+  const name = String(location?.name || location?.displayName || "").trim().replace(/\s+/g, " ").toLowerCase();
+  return `${WEATHER_CACHE_PREFIX}${countryCode}:${name}:${date}:${stage}`;
 }
 
 function weatherDescription(code) {
   return WEATHER_CODE_TEXT[Number(code)] || "天气待确认";
 }
 
-function weatherIcon(code) {
-  const value = Number(code);
-  if ([0, 1].includes(value)) return "☀";
-  if ([2, 3].includes(value)) return "☁︎";
-  if ([45, 48].includes(value)) return "≋";
-  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(value)) return "☔︎";
-  if ([71, 73, 75, 77, 85, 86].includes(value)) return "❄︎";
-  if ([95, 96, 99].includes(value)) return "⚡︎";
-  return "☁︎";
-}
-
-function weatherTone(code) {
+function weatherCategory(code) {
   const value = Number(code);
   if ([0, 1].includes(value)) return "sunny";
-  if ([2, 3, 45, 48].includes(value)) return "cloudy";
+  if (value === 2) return "partly-cloudy";
+  if (value === 3) return "cloudy";
+  if ([45, 48].includes(value)) return "fog";
   if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(value)) return "rain";
   if ([71, 73, 75, 77, 85, 86].includes(value)) return "snow";
-  if ([95, 96, 99].includes(value)) return "storm";
+  if ([95, 96, 99].includes(value)) return "thunderstorm";
   return "cloudy";
+}
+
+function weatherIllustrationPath(category, iconSet) {
+  return `./icons/weather/${iconSet}/${category}.svg`;
+}
+
+function precipitationAmountLabel(value) {
+  const amount = Number(value);
+  if (!Number.isFinite(amount)) return "暂无";
+  if (amount < 0.1) return "无雨";
+  if (amount < 1) return "毛毛雨";
+  if (amount < 10) return "小雨";
+  if (amount < 25) return "中雨";
+  if (amount < 50) return "大雨";
+  return "暴雨";
+}
+
+function precipitationProbabilityLabel(value) {
+  const probability = Number(value);
+  if (!Number.isFinite(probability)) return "降水概率暂无";
+  if (probability < 30) return "降水概率低";
+  if (probability < 60) return "降水概率中";
+  return "降水概率高";
+}
+
+function windStrengthLabel(value) {
+  const speed = Number(value);
+  if (!Number.isFinite(speed)) return "暂无";
+  if (speed < 2) return "无风";
+  if (speed < 12) return "微风";
+  if (speed < 20) return "和风";
+  if (speed < 29) return "较强风";
+  if (speed < 39) return "大风";
+  if (speed < 50) return "强风";
+  return "狂风";
+}
+
+function referenceWeatherCategory(data) {
+  if (Number(data.rainRatio) >= 0.45 || Number(data.precipitation) >= 3) return "rain";
+  if (Number(data.rainRatio) >= 0.2 || Number(data.precipitation) >= 0.5) return "cloudy";
+  return "partly-cloudy";
+}
+
+function referenceWeatherDescription(data) {
+  if (Number(data.rainRatio) >= 0.45 || Number(data.precipitation) >= 3) return "同期较常有雨";
+  if (Number(data.rainRatio) >= 0.2 || Number(data.precipitation) >= 0.5) return "同期偶有降雨";
+  return "同期通常少雨";
 }
 
 function weatherDayOffset(dateString) {
@@ -989,11 +1044,6 @@ function weatherDayOffset(dateString) {
 function isForecastDate(day) {
   const offset = weatherDayOffset(day.date);
   return offset >= 0 && offset <= WEATHER_FORECAST_DAYS;
-}
-
-function isTrendDate(day) {
-  const offset = weatherDayOffset(day.date);
-  return offset > WEATHER_FORECAST_DAYS && offset <= WEATHER_TREND_DAYS;
 }
 
 function hasWeatherCoordinates(location) {
@@ -1026,7 +1076,7 @@ function normalizeWeatherPayload(day, location, payload) {
   return {
     type: "forecast",
     date: day.date,
-    city: location.name,
+    city: weatherLocationLabel(location),
     max: daily.temperature_2m_max?.[index],
     min: daily.temperature_2m_min?.[index],
     rain: daily.precipitation_probability_max?.[index],
@@ -1056,36 +1106,60 @@ async function fetchWeather(day, location) {
 }
 
 function weatherLocationForDay(day) {
-  const location = day.weatherLocation?.name ? day.weatherLocation : WEATHER_LOCATIONS_BY_DATE[day.date];
-  if (location?.name) return location;
+  const location = day.weatherLocation || WEATHER_LOCATIONS_BY_DATE[day.date];
+  if (location && (hasWeatherCoordinates(location) || weatherLocationLabel(location))) {
+    const displayName = weatherLocationLabel(location);
+    return {
+      ...location,
+      displayName,
+      name: String(location.name || displayName).trim(),
+    };
+  }
   const candidates = [
     day.city,
-    day.titleOverride,
     day.routeOverview?.city,
     ...(day.brief?.hotelChanges || []).map((hotel) => hotel.city),
     ...eventsForDay(day).map((event) => event.city),
   ];
   const name = candidates.find((value) => typeof value === "string" && value.trim() && !/[→>]/.test(value));
-  return name ? { name: name.trim() } : null;
+  return name ? {
+    displayName: name.trim(),
+    name: name.trim(),
+    source: "inferred-city-field",
+  } : null;
 }
 
 async function resolveWeatherLocation(location) {
-  if (!location?.name) return hasWeatherCoordinates(location) ? { ...location, id: location.id || `${location.latitude},${location.longitude}` } : null;
-  const cacheKey = `${WEATHER_CACHE_PREFIX}place:${location.name}:${location.countryCode || ""}`;
+  if (!location) return null;
+  const displayName = weatherLocationLabel(location);
+  const name = String(location.name || displayName).trim();
+  if (hasWeatherCoordinates(location)) {
+    return {
+      ...location,
+      displayName: displayName || name,
+      name,
+      latitude: Number(location.latitude),
+      longitude: Number(location.longitude),
+    };
+  }
+  if (!name) return null;
+  const countryCode = String(location.countryCode || "").trim().toUpperCase();
+  const cacheKey = `${WEATHER_CACHE_PREFIX}place:${countryCode}:${name.toLowerCase()}`;
   const cached = state.weatherCache.get(cacheKey);
   if (cached) return cached;
-  const params = new URLSearchParams({ name: location.name, count: "1", language: "zh", format: "json" });
-  if (location.countryCode) params.set("countryCode", location.countryCode);
+  const params = new URLSearchParams({ name, count: "1", language: "zh", format: "json" });
+  if (countryCode) params.set("countryCode", countryCode);
   const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`天气城市读取失败：${response.status}`);
   const result = (await response.json()).results?.[0];
   if (!result || !hasWeatherCoordinates(result)) return null;
   const resolved = {
-    id: String(result.id || `${result.latitude},${result.longitude}`),
-    name: location.displayName || location.name,
+    displayName: displayName || name,
+    name,
     latitude: result.latitude,
     longitude: result.longitude,
-    countryCode: result.country_code,
+    countryCode: result.country_code || countryCode,
+    source: location.source || "geocoded-city-center",
     updatedAt: new Date().toISOString(),
   };
   state.weatherCache.set(cacheKey, resolved);
@@ -1109,7 +1183,7 @@ function historyWindow(day) {
     dates,
     start: sample[0],
     end: sample[sample.length - 1],
-    label: `近${years.length}年 ${shortDate(dateAtYear(day.date, lastYear, -WEATHER_HISTORY_WINDOW_DAYS))}–${shortDate(dateAtYear(day.date, lastYear, WEATHER_HISTORY_WINDOW_DAYS))}`,
+    label: `近${years.length}年${shortDate(dateAtYear(day.date, lastYear, -WEATHER_HISTORY_WINDOW_DAYS))}–${shortDate(dateAtYear(day.date, lastYear, WEATHER_HISTORY_WINDOW_DAYS))}`,
   };
 }
 
@@ -1132,7 +1206,7 @@ function historyAdvice({ avgHigh, avgLow, rainRatio }) {
   return { risks: risks.length ? risks : ["天气温和"], packingHint: `${packingHint}。` };
 }
 
-function summarizeHistory(day, location, payload, type) {
+function summarizeHistory(day, location, payload) {
   const window = historyWindow(day);
   const daily = payload.daily || {};
   const rows = (daily.time || []).map((date, index) => ({
@@ -1140,105 +1214,144 @@ function summarizeHistory(day, location, payload, type) {
     max: Number(daily.temperature_2m_max?.[index]),
     min: Number(daily.temperature_2m_min?.[index]),
     precipitation: Number(daily.precipitation_sum?.[index]),
-  })).filter((row) => window.dates.has(row.date) && Number.isFinite(row.max) && Number.isFinite(row.min) && Number.isFinite(row.precipitation));
+    wind: Number(daily.wind_speed_10m_max?.[index]),
+  })).filter((row) => window.dates.has(row.date) && Number.isFinite(row.max) && Number.isFinite(row.min) && Number.isFinite(row.precipitation) && Number.isFinite(row.wind));
   if (rows.length < 35) return null;
   const highs = rows.map((row) => row.max);
   const lows = rows.map((row) => row.min);
   const precipitation = rows.map((row) => row.precipitation);
+  const winds = rows.map((row) => row.wind);
   const [highLow, highHigh] = commonRange(highs);
   const [lowLow, lowHigh] = commonRange(lows);
   const rainRatio = rows.filter((row) => row.precipitation >= 0.1).length / rows.length;
   const advice = historyAdvice({ avgHigh: average(highs), avgLow: average(lows), rainRatio });
   return {
-    type,
-    city: location.name,
+    type: "historical",
+    city: weatherLocationLabel(location),
     max: average(highs),
     min: average(lows),
     highRange: [highLow, highHigh],
     lowRange: [lowLow, lowHigh],
     rainRatio,
     precipitation: average(precipitation),
+    wind: average(winds),
     windowLabel: window.label,
     risks: advice.risks,
-    description: type === "trend" ? "远期趋势仅供行前准备，不是准确预报。" : "这是历史同期参考，不是天气预报。",
+    description: "这是历史同期参考，不是天气预报。",
     packingHint: advice.packingHint,
     updatedAt: new Date().toISOString(),
     source: "online",
   };
 }
 
-async function fetchHistoricalWeather(day, location, type) {
+async function fetchHistoricalWeather(day, location) {
   const window = historyWindow(day);
   const params = new URLSearchParams({
     latitude: String(location.latitude),
     longitude: String(location.longitude),
     start_date: window.start,
     end_date: window.end,
-    daily: "temperature_2m_max,temperature_2m_min,precipitation_sum",
+    daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max",
     timezone: "auto",
   });
   const response = await fetch(`https://archive-api.open-meteo.com/v1/archive?${params.toString()}`, { cache: "no-store" });
   if (!response.ok) throw new Error(`历史天气读取失败：${response.status}`);
-  return summarizeHistory(day, location, await response.json(), type);
+  return summarizeHistory(day, location, await response.json());
 }
 
 function pendingWeather(location, description = "缺少天气城市") {
   return {
     type: "pending",
-    city: location?.name || "天气城市待确认",
+    city: weatherLocationLabel(location) || "天气城市待确认",
     description,
   };
 }
 
-function renderWeatherContent(container, data) {
+function renderWeatherContent(container, data, iconSet = "static") {
   container.replaceChildren();
   const type = data?.type || "pending";
-  const ticket = createElement("div", `weather-ticket weather-ticket--${type === "forecast" ? weatherTone(data.code) : type}`);
-  const main = createElement("div", "weather-ticket__main");
-  main.append(createElement("p", "weather-icon", type === "forecast" ? weatherIcon(data.code) : "◌"));
-  const temperature = createElement("div");
+  const isReference = type === "historical";
+  const category = type === "forecast" ? weatherCategory(data.code) : isReference ? referenceWeatherCategory(data) : "cloudy";
+  const description = type === "forecast" ? data.description : isReference ? referenceWeatherDescription(data) : data.description;
+  const status = type === "historical" ? (data.windowLabel || "历史同期参考") : "";
+  const ticket = createElement("div", `weather-ticket weather-ticket--${category} weather-ticket--${type}`);
+
+  const visual = createElement("div", "weather-ticket__visual");
+  const visualHeading = createElement("div", "weather-ticket__visual-heading");
+  if (status) visualHeading.append(createElement("p", "weather-status-label", status));
+  visualHeading.append(createElement("p", "weather-desc", description));
+  visual.append(visualHeading);
+  const iconSlot = createElement("div", `weather-illustration weather-illustration--${category}`);
+  iconSlot.dataset.weatherVisual = category;
+  iconSlot.setAttribute("aria-hidden", "true");
+  const illustration = createElement("img", "weather-illustration__image");
+  illustration.src = weatherIllustrationPath(category, iconSet);
+  illustration.alt = "";
+  illustration.decoding = "async";
+  illustration.loading = iconSet === "animation" ? "eager" : "lazy";
+  iconSlot.append(illustration);
+  visual.append(iconSlot);
+  ticket.append(visual);
+
+  const content = createElement("div", "weather-ticket__content");
+  content.append(createElement("p", "weather-city", data.city));
+  const temperature = createElement("div", "weather-ticket__temperature");
   if (hasWeatherNumber(data.max) && hasWeatherNumber(data.min)) {
-    temperature.append(createElement("p", "weather-temp", String(Math.round(data.max))));
-    temperature.append(createElement("p", "weather-temp-sub", `${["historical", "trend"].includes(type) ? "平均最低" : "最低"} ${Math.round(data.min)}°`));
+    if (isReference) temperature.append(createElement("p", "weather-temp-label", "平均最高"));
+    const high = createElement("p", "weather-temp");
+    high.append(
+      createElement("span", "weather-temp__value", String(Math.round(data.max))),
+      createElement("span", "weather-temp__unit", "℃")
+    );
+    temperature.append(high);
+    temperature.append(createElement("p", "weather-temp-sub", `${isReference ? "平均最低" : "最低"} ${Math.round(data.min)}℃`));
   } else {
     temperature.append(createElement("p", "weather-temp weather-temp--pending", "—"));
     temperature.append(createElement("p", "weather-temp-sub", type === "pending" ? "尚未进入预报期" : "暂无温度参考"));
   }
-  main.append(temperature);
-  ticket.append(main);
+  content.append(temperature);
 
-  const details = createElement("div", "weather-ticket__details");
-  details.append(createElement("p", "weather-status-label", type === "historical" ? "历史同期参考" : type === "trend" ? "远期天气趋势" : "天气预报"));
-  details.append(createElement("p", "weather-city", data.city));
-  details.append(createElement("p", "weather-desc", data.description));
-  const pills = createElement("div", "weather-pills");
-  if (["historical", "trend"].includes(type)) {
-    if (data.windowLabel) pills.append(createElement("span", "weather-pill", data.windowLabel));
-    if (data.highRange) pills.append(createElement("span", "weather-pill", `高温常见 ${Math.round(data.highRange[0])}–${Math.round(data.highRange[1])}°`));
-    if (data.lowRange) pills.append(createElement("span", "weather-pill", `低温常见 ${Math.round(data.lowRange[0])}–${Math.round(data.lowRange[1])}°`));
-    if (hasWeatherNumber(data.rainRatio)) pills.append(createElement("span", "weather-pill", `雨日 ${Math.round(data.rainRatio * 100)}%`));
-    if (hasWeatherNumber(data.precipitation)) pills.append(createElement("span", "weather-pill", `平均雨量 ${data.precipitation.toFixed(1)} mm`));
-    (data.risks || []).forEach((risk) => pills.append(createElement("span", "weather-pill", risk)));
+  const summary = createElement("p", "weather-summary");
+  summary.setAttribute("aria-label", isReference ? "历史天气统计" : "天气提示");
+  const summaryValues = type === "forecast"
+    ? [
+        precipitationProbabilityLabel(data.rain),
+        precipitationAmountLabel(data.precipitation),
+        windStrengthLabel(data.wind),
+      ]
+    : isReference
+      ? [
+          hasWeatherNumber(data.rainRatio) ? `同期雨日${Number(data.rainRatio) >= 0.4 ? "较多" : Number(data.rainRatio) >= 0.2 ? "偶有" : "较少"}` : "同期雨日暂无",
+          `平均${precipitationAmountLabel(data.precipitation)}`,
+          `通常${windStrengthLabel(data.wind)}`,
+        ]
+      : [
+          "降水概率暂无",
+          "降雨强度暂无",
+          "风力暂无",
+        ];
+  summaryValues.forEach((value) => {
+    summary.append(createElement("span", "", value));
+  });
+  content.append(summary);
+
+  if (isReference) {
+    const reference = createElement("div", "weather-reference");
+    const ranges = [];
+    if (data.highRange) ranges.push(`常见高温 ${Math.round(data.highRange[0])}–${Math.round(data.highRange[1])}°`);
+    if (data.lowRange) ranges.push(`常见低温 ${Math.round(data.lowRange[0])}–${Math.round(data.lowRange[1])}°`);
+    if (ranges.length) reference.append(createElement("p", "weather-reference__ranges", ranges.join(" · ")));
+    content.append(reference);
   }
-  if (type === "forecast" && hasWeatherNumber(data.rain)) pills.append(createElement("span", "weather-pill", `降水 ${Math.round(data.rain)}%`));
-  if (type === "forecast" && hasWeatherNumber(data.precipitation)) pills.append(createElement("span", "weather-pill", `雨量 ${data.precipitation} mm`));
-  if (type === "forecast" && hasWeatherNumber(data.wind)) pills.append(createElement("span", "weather-pill", `风 ${Math.round(data.wind)} km/h`));
-  if (pills.children.length) details.append(pills);
-  if (data.packingHint) details.append(createElement("p", "weather-climate-note", data.packingHint));
-  if (data.source === "cache") {
-    details.append(createElement("p", "weather-cache-note", `离线缓存 · ${formatWeatherUpdatedAt(data.updatedAt)}`));
-  } else {
-    const updatedText = formatWeatherUpdatedAt(data.updatedAt);
-    details.append(createElement("p", "weather-cache-note", updatedText ? `已更新 · ${updatedText}` : "尚无可用预报"));
-  }
-  ticket.append(details);
+
+  ticket.append(content);
   container.append(ticket);
 }
 
-async function updateWeatherCard(day, container) {
+async function updateWeatherCard(day, container, iconSet = "static") {
   const requestedLocation = weatherLocationForDay(day);
   if (!requestedLocation) {
-    renderWeatherContent(container, pendingWeather(null));
+    renderWeatherContent(container, pendingWeather(null), iconSet);
     return;
   }
   let location;
@@ -1246,31 +1359,32 @@ async function updateWeatherCard(day, container) {
     location = await resolveWeatherLocation(requestedLocation);
   } catch (error) {
     console.warn("天气城市更新失败", error);
-    renderWeatherContent(container, pendingWeather(requestedLocation, `无法识别天气城市：${requestedLocation.name}`));
+    renderWeatherContent(container, pendingWeather(requestedLocation, `无法识别天气城市：${weatherLocationLabel(requestedLocation)}`), iconSet);
     return;
   }
   if (!location) {
-    renderWeatherContent(container, pendingWeather(requestedLocation, `无法识别天气城市：${requestedLocation.name}`));
+    renderWeatherContent(container, pendingWeather(requestedLocation, `无法识别天气城市：${weatherLocationLabel(requestedLocation)}`), iconSet);
     return;
   }
-  const type = isForecastDate(day) ? "forecast" : isTrendDate(day) ? "trend" : "historical";
-  const cacheKey = weatherCacheKey(type, location, type === "forecast" ? day.date : `${day.date.slice(5)}:${WEATHER_HISTORY_WINDOW_DAYS}`);
+  const type = isForecastDate(day) ? "forecast" : "historical";
+  const cacheKey = weatherCacheKey(type, location, day.date);
   const cached = state.weatherCache.get(cacheKey);
-  if (cached) renderWeatherContent(container, { ...cached, source: "cache" });
-  else renderWeatherContent(container, pendingWeather(location, navigator.onLine ? "正在更新天气" : "暂无缓存天气"));
-  if (!navigator.onLine || (type === "forecast" && weatherCacheIsFresh(cached)) || cached) return;
+  if (cached) renderWeatherContent(container, { ...cached, source: "cache" }, iconSet);
+  else renderWeatherContent(container, pendingWeather(location, navigator.onLine ? "正在更新天气" : "暂无缓存天气"), iconSet);
+  const cachedIsComplete = type === "forecast" || hasWeatherNumber(cached?.wind);
+  if (!navigator.onLine || (type === "forecast" && weatherCacheIsFresh(cached)) || (cached && cachedIsComplete)) return;
   try {
-    const fresh = type === "forecast" ? await fetchWeather(day, location) : await fetchHistoricalWeather(day, location, type);
+    const fresh = type === "forecast" ? await fetchWeather(day, location) : await fetchHistoricalWeather(day, location);
     if (!fresh) {
-      if (!cached) renderWeatherContent(container, pendingWeather(location, "暂无可用天气数据"));
+      if (!cached) renderWeatherContent(container, pendingWeather(location, "暂无可用天气数据"), iconSet);
       return;
     }
     state.weatherCache.set(cacheKey, fresh);
     await putInStore("meta", { key: cacheKey, value: fresh });
-    renderWeatherContent(container, fresh);
+    renderWeatherContent(container, fresh, iconSet);
   } catch (error) {
     console.warn("天气更新失败", error);
-    if (!cached) renderWeatherContent(container, pendingWeather(location, "暂时无法更新天气"));
+    if (!cached) renderWeatherContent(container, pendingWeather(location, "暂时无法更新天气"), iconSet);
   }
 }
 
@@ -2526,7 +2640,7 @@ function renderTodayPanel(day, index, position, isLastPanel) {
   const weatherBody = createElement("div", "weather-card-body");
   weatherCard.append(weatherBody);
   summary.append(weatherCard);
-  updateWeatherCard(day, weatherBody);
+  updateWeatherCard(day, weatherBody, "animation");
 
   const routeOverview = createRouteOverview(day);
   const keyTransportEventIds = keyTransportEventIdsForDay(day);
@@ -3074,7 +3188,7 @@ function renderDay() {
   elements.previous.disabled = state.selectedIndex === 0;
   elements.next.disabled = state.selectedIndex === state.itinerary.days.length - 1;
 
-  updateWeatherCard(day, elements.weather);
+  updateWeatherCard(day, elements.weather, "static");
   renderHotelBrief(day);
   renderTransportBrief(day);
   renderBriefList(elements.important, day.brief.importantEventIds, "当天没有特别提醒", "important");
